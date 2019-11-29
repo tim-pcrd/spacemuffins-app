@@ -1,0 +1,15 @@
+@import '../../../variables';
+
+.nav-caption {
+  margin-left: 6px;
+}
+
+
+.list-item-active {
+  font-weight: bold;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+a {
+  color:$primary-color-lightest !important;
+}

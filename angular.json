@@ -23,8 +23,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/my-theme-scss",
-              "src/styles.css"
+              "src/my-theme.scss",
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -118,5 +118,10 @@
       }
     }
   },
-  "defaultProject": "spacemuffins-app"
+  "defaultProject": "spacemuffins-app",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }

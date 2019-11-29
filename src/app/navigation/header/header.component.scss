@@ -1,0 +1,72 @@
+@import '../../../variables';
+
+.header-img {
+  height: 80px;
+}
+
+img {
+  height: 100%;
+}
+
+mat-toolbar {
+  height: 80px;
+}
+
+.title {
+  margin-left: 8px;
+  color: $primary-color;
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+
+.second-title{
+  font-weight: 900;
+}
+
+mat-toolbar {
+  border-bottom: 2px solid $primary-color;
+  background-color:rgba(230, 234, 234,0.9)!important;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+}
+
+.menu-items {
+  color: $primary-color;
+  list-style-type: none;
+
+  a {
+    text-decoration: none;
+    color: $primary-color;
+  }
+
+  a:hover {
+    color: $primary-color-light;
+  }
+
+  a:active {
+    color: $primary-color-light;
+  }
+}
+
+
+
+
+@media only screen and (max-width: 599px) {
+  mat-toolbar {
+    height: 50px;
+  }
+
+  .header-img {
+    height: 50px;
+    margin-left: 18px;
+  }
+
+
+}
+
+
+
+
+
+

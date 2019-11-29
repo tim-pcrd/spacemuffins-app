@@ -1,1 +1,28 @@
-<p>header works!</p>
+<mat-toolbar>
+  <div>
+    <button color="primary" mat-icon-button (click)="onToggleSideNav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+  <a class="header-img" [routerLink]="">
+      <img src="../../../assets/images/logo_200w.png">
+  </a>
+  <span class="title">Space<span class="second-title">muffins</span></span>
+
+  <div fxFlex fxLayout fxLayoutAlign="end">
+    <ul fxLayout fxLayoutGap="15px" class="menu-items">
+      <li>
+          <a [routerLink]="" routerLinkActive="active">Quizoverzicht</a>
+      </li>
+      <li>
+          <a [routerLink]="" routerLinkActive="active">Login</a>
+      </li>
+      <li>
+        <a [routerLink]="" routerLinkActive="active">Logout</a>
+    </li>
+    </ul>
+
+
+  </div>
+</mat-toolbar>
+

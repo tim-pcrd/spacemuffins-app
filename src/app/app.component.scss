@@ -1,0 +1,22 @@
+@import '../variables';
+
+main {
+  padding-top: 95px;
+  background-color: $primary-color-lightest;
+}
+
+
+@media only screen and (max-width: 599px) {
+  main {
+    padding-top: 70px;
+  }
+}
+
+mat-sidenav-container {
+  height: 100%;
+}
+
+mat-sidenav {
+  width: 200px;
+  background-color: $primary-color !important;
+}

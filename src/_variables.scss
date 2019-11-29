@@ -1,0 +1,6 @@
+@import '~@angular/material/theming';
+@import './my-theme.scss';
+
+$primary-color-lightest: #f7faf7;
+$primary-color-light: mat-color($app-primary, 300);
+$primary-color: mat-color($app-primary,);
