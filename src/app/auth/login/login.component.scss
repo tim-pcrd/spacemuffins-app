@@ -1,0 +1,37 @@
+section {
+  padding-top: 110px;
+}
+
+mat-card {
+  width: 480px;
+  text-align: center;
+
+}
+
+mat-form-field {
+  width: 70%;
+  font-size: 1rem;
+}
+
+button {
+  width: 30%;
+  height: 45px;
+}
+
+@media only screen and (max-width: 599px) {
+  section {
+    padding-top: 80px;
+  }
+
+  mat-card {
+    width: 270px;
+  }
+
+  mat-form-field {
+    width: 80%;
+  }
+
+  button {
+    width: 40%;
+  }
+}

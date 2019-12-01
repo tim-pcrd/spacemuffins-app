@@ -14,11 +14,11 @@
       <li>
           <a [routerLink]="" routerLinkActive="active">Quizoverzicht</a>
       </li>
-      <li>
-          <a [routerLink]="" routerLinkActive="active">Login</a>
+      <li *ngIf="!isAuth && show">
+          <a [routerLink]="['/login']" routerLinkActive="active">Login</a>
       </li>
-      <li>
-        <a [routerLink]="" routerLinkActive="active">Logout</a>
+      <li *ngIf="isAuth && show">
+        <a (click)="onLogout()">Logout</a>
     </li>
     </ul>
 

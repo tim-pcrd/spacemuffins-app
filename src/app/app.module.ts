@@ -1,5 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,6 +17,8 @@ import { QuizComponent } from './quiz/quiz.component';
 import { QuizListComponent } from './quiz/quiz-list/quiz-list.component';
 import { QuizNewComponent } from './quiz/quiz-new/quiz-new.component';
 import { QuizDetailComponent } from './quiz/quiz-detail/quiz-detail.component';
+import { environment } from 'src/environments/environment';
+import { LoginComponent } from './auth/login/login.component';
 
 @NgModule({
   declarations: [
@@ -23,14 +29,19 @@ import { QuizDetailComponent } from './quiz/quiz-detail/quiz-detail.component';
     QuizComponent,
     QuizListComponent,
     QuizNewComponent,
-    QuizDetailComponent
+    QuizDetailComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
     MaterialModule,
     AppRoutingModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
