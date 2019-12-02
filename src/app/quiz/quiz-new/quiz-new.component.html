@@ -1,24 +1,55 @@
 <section>
-  <form fxLayout fxLayoutAlign="center">
+  <form fxLayout fxLayoutAlign="center" #f="ngForm" (ngSubmit)="onSubmit(f)">
     <mat-card>
+      <mat-card-header fxLayout="column" fxLayoutAlign="center center">
+          <mat-card-title>Gegevens</mat-card-title>
+      </mat-card-header>
       <mat-card-content fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="12px">
         <mat-form-field appearance="outline">
           <mat-label>Naam</mat-label>
-          <textarea type="text" matInput rows="2"></textarea>
+          <textarea type="text" matInput rows="2" name="naam" required ngModel #naam="ngModel"></textarea>
+          <mat-error>Verplicht veld</mat-error>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
           <mat-label>Adres</mat-label>
-          <textarea type="text" matInput rows="3"></textarea>
+          <textarea type="text" matInput rows="3" name="adres" required ngModel #adres="ngModel"></textarea>
+          <mat-error>Verplicht veld</mat-error>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
           <mat-label>Kies een datum</mat-label>
-          <input matInput [matDatepicker]="picker">
+          <input matInput [matDatepicker]="picker" name="datum" required ngModel #datum="ngModel">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker touchUi #picker></mat-datepicker>
+          <mat-error>Verplicht veld</mat-error>
         </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Uur</mat-label>
+          <mat-select name="uur" required ngModel #uur="ngModel">
+            <mat-option [value]="'19.00'">
+              19.00
+            </mat-option>
+            <mat-option [value]="'19.30'">
+              19.30
+            </mat-option>
+            <mat-option [value]="'20.00'">
+              20.00
+            </mat-option>
+            <mat-option [value]="'20.30'">
+              20.30
+            </mat-option>
+            <mat-option [value]="'21.00'">
+              21.00
+            </mat-option>
+          </mat-select>
+          <mat-error>Verplicht veld</mat-error>
+        </mat-form-field>
+
         <mat-form-field appearance="outline">
           <mat-label>Aantal spelers</mat-label>
-          <mat-select name="numberOfPlayers">
+          <mat-select name="aantalSpelers" name="aantalSpelers" required ngModel #aantalSpelers="ngModel">
             <mat-option [value]="2">
               2
             </mat-option>
@@ -35,26 +66,29 @@
               6
             </mat-option>
           </mat-select>
+          <mat-error>Verplicht veld</mat-error>
         </mat-form-field>
+
         <div class="checkboxes" fxLayout="row" fxLayoutAlign="space-between">
-          <mat-checkbox color="primary">
+          <mat-checkbox color="primary" name="arno" ngModel>
             Arno
           </mat-checkbox>
-          <mat-checkbox color="primary">
+          <mat-checkbox color="primary" name="bart" ngModel>
             Bart
           </mat-checkbox>
-          <mat-checkbox color="primary">
+          <mat-checkbox color="primary" name="tim" ngModel >
             Tim
           </mat-checkbox>
-          <mat-checkbox color="primary">
+          <mat-checkbox color="primary" name="ward" ngModel>
             Ward
           </mat-checkbox>
         </div>
+
         <mat-form-field appearance="outline">
           <mat-label>Invallers</mat-label>
           <mat-chip-list #chipList aria-label="Invallers">
             <mat-chip *ngFor="let invaller of invallers" [selectable]="selectable"
-                      [removable]="removable" (removed)="remove(invaller)">
+                      [removable]="removable" (removed)="removeInvaller(invaller)">
               {{invaller}}
               <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
             </mat-chip>
@@ -62,16 +96,18 @@
                     [matChipInputFor]="chipList"
                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                     [matChipInputAddOnBlur]="addOnBlur"
-                    (matChipInputTokenEnd)="add($event)">
+                    (matChipInputTokenEnd)="addInvaller($event)">
           </mat-chip-list>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
           <mat-label>Opmerkingen</mat-label>
-          <textarea matInput rows="3"></textarea>
+          <textarea matInput rows="3" name="opmerkingen" ngModel></textarea>
         </mat-form-field>
+
         <div fxLayout fxLayout="center" fxLayoutGap="10px">
           <button mat-raised-button color="primary" type="submit">OPSLAAN</button>
-          <button mat-raised-button color="warn">ANNULEER</button>
+          <button mat-raised-button color="warn" type="button" (click)="onReset(f)">ANNULEER</button>
         </div>
       </mat-card-content>
     </mat-card>

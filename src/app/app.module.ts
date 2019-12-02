@@ -19,6 +19,8 @@ import { QuizNewComponent } from './quiz/quiz-new/quiz-new.component';
 import { QuizDetailComponent } from './quiz/quiz-detail/quiz-detail.component';
 import { environment } from 'src/environments/environment';
 import { LoginComponent } from './auth/login/login.component';
+import { SuccessComponent } from './shared/success/success.component';
+import { ErrorComponent } from './shared/error/error.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { LoginComponent } from './auth/login/login.component';
     QuizListComponent,
     QuizNewComponent,
     QuizDetailComponent,
-    LoginComponent
+    LoginComponent,
+    SuccessComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +48,7 @@ import { LoginComponent } from './auth/login/login.component';
     AngularFirestoreModule
   ],
   providers: [],
+  entryComponents: [SuccessComponent, ErrorComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

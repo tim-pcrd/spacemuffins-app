@@ -12,7 +12,7 @@ section {
 }
 
 mat-card {
-  width: 600px;
+  width: 700px;
   text-align: center;
 }
 
@@ -23,6 +23,24 @@ mat-form-field {
 
 button {
   width: 110px;
+}
+
+mat-card-title {
+  color: $primary-color;
+}
+
+@media only screen and (max-width: 799px) {
+  mat-card {
+    width: 460px;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  .checkboxes {
+    width: 100%;
+  }
 }
 
 

@@ -1,6 +1,9 @@
 <section class="main">
   <form fxLayout fxLayoutAlign="center" #f="ngForm" (ngSubmit)="onSubmit(f)">
     <mat-card>
+      <mat-card-header fxLayout="column" fxLayoutAlign="center center">
+          <mat-card-title>Login</mat-card-title>
+      </mat-card-header>
       <mat-card-content fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="12px">
         <mat-form-field>
           <mat-icon matSuffix color="primary">email</mat-icon>

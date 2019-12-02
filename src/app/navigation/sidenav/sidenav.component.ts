@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
+import { UIService } from 'src/app/shared/ui.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -11,7 +12,7 @@ export class SidenavComponent implements OnInit {
   isAuth = false;
   show = false;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private uiService: UIService) { }
 
   ngOnInit() {
     this.authService.authChange.subscribe(authState => {
@@ -27,6 +28,11 @@ export class SidenavComponent implements OnInit {
   onLogout() {
     this.authService.logout();
     this.onCloseSideNav();
+  }
+
+  onChangeTab() {
+    this.onCloseSideNav();
+    this.uiService.changeTabIndex.next(0);
   }
 
 }

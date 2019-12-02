@@ -1,4 +1,30 @@
+@import '../../../variables';
+
+section {
+  padding-top: 30px;
+}
+
 mat-card {
-  width: 500px;
-  margin: 0 auto;
+  width: 1200px;
+}
+
+mat-form-field {
+  font-size: 16px!important;
+  width: 250px;
+}
+
+@media only screen and (max-width: 1259px) {
+  mat-card {
+    width: 88%;
+  }
+}
+
+@media only screen and (max-width: 599px) {
+  section {
+    padding-top: 20px;
+  }
+
+  mat-form-field {
+    width: 280px;
+  }
 }

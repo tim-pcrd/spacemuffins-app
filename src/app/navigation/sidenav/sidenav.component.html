@@ -12,9 +12,9 @@
 
   <a
     mat-list-item
-    (click)="onCloseSideNav()"
     routerLinkActive="list-item-active"
-    [routerLink]="['/quizzen']">
+    [routerLink]="['/quizzen']"
+    (click)="onChangeTab()">
       <mat-icon matListIcon>view_list</mat-icon>
       <span class="nav-caption">Quizoverzicht</span>
   </a>
