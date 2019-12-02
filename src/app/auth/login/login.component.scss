@@ -1,5 +1,5 @@
 section {
-  padding-top: 110px;
+  padding-top: 150px;
 }
 
 mat-card {
@@ -15,7 +15,6 @@ mat-form-field {
 
 button {
   width: 30%;
-  height: 45px;
 }
 
 @media only screen and (max-width: 599px) {
@@ -24,14 +23,20 @@ button {
   }
 
   mat-card {
-    width: 270px;
+    width: 300px;
   }
 
   mat-form-field {
-    width: 80%;
+    width: 100%;
   }
 
   button {
     width: 40%;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  mat-card {
+    width: 280px;
   }
 }

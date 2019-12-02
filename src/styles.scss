@@ -1,4 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+@import './variables';
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+// mat-card {
+//   background-color: $primary-color-lightest!important;
+// }
+
+button {
+  height: 45px;
+}
+
+.main {
+  padding-bottom: 50px;
+}

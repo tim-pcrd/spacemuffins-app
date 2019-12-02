@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth} from '@angular/fire/auth';
 import { AuthData } from './auth-data.model';
 import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
   authChange = new Subject<boolean>();
 
-  constructor(private firebaseAuth: AngularFireAuth) {}
+  constructor(private firebaseAuth: AngularFireAuth, private router: Router) {}
 
   authListener() {
     // this.firebaseAuth.auth.onAuthStateChanged(user => {
@@ -24,8 +25,9 @@ export class AuthService {
         this.authChange.next(true);
       } else {
         this.authChange.next(false);
+        this.router.navigate(['/']);
       }
-    })
+    });
   }
 
   login(authData: AuthData) {

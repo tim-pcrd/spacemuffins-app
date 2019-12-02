@@ -1,0 +1,21 @@
+@import '../../variables';
+section {
+  padding-top: 80px;
+}
+
+@media only screen and (max-width: 599px) {
+  section {
+    padding-top:50px;
+  }
+}
+
+
+
+
+.mat-tab-label-content {
+  color:white;
+}
+
+.mat-ink-bar {
+  background-color: white!important;
+}

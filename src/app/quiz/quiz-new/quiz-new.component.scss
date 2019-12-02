@@ -1,0 +1,53 @@
+@import '../../../variables';
+
+section {
+  padding-top: 30px;
+}
+
+.checkboxes {
+  width: 70%;
+  border: 1px solid $primary-color;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+mat-card {
+  width: 600px;
+  text-align: center;
+}
+
+mat-form-field {
+  width: 70%;
+  font-size: 1rem!important;
+}
+
+button {
+  width: 110px;
+}
+
+
+@media only screen and (max-width: 599px) {
+  section {
+    padding-top: 20px;
+  }
+
+  mat-card {
+    width: 300px;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  .checkboxes {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  mat-card {
+    width: 280px;
+  }
+}
+
+

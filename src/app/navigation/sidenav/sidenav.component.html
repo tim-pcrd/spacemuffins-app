@@ -20,19 +20,19 @@
   </a>
 
   <a
-  mat-list-item
-  (click)="onCloseSideNav()"
-  routerLinkActive="list-item-active"
-  [routerLink]="['/login']">
+    mat-list-item
+    (click)="onCloseSideNav()"
+    routerLinkActive="list-item-active"
+    [routerLink]="['/login']"
+    *ngIf="!isAuth && show">
     <mat-icon matListIcon>fingerprint</mat-icon>
     <span class="nav-caption">Login</span>
   </a>
 
   <a
     mat-list-item
-    (click)="onCloseSideNav()"
-    routerLinkActive="list-item-active"
-    [routerLink]="['/logout']">
+    (click)="onLogout()"
+    *ngIf="isAuth && show">
       <mat-icon matListIcon>exit_to_app</mat-icon>
       <span class="nav-caption">Logout</span>
   </a>

@@ -1,11 +1,13 @@
-<section>
+<section class="main">
   <form fxLayout fxLayoutAlign="center" #f="ngForm" (ngSubmit)="onSubmit(f)">
     <mat-card>
       <mat-card-content fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="12px">
         <mat-form-field>
+          <mat-icon matSuffix color="primary">email</mat-icon>
           <input type="email" matInput placeholder="Email" required name="email" ngModel #emailInput="ngModel">
         </mat-form-field>
         <mat-form-field>
+          <mat-icon matSuffix color="primary">lock</mat-icon>
           <input type="password" matInput placeholder="Wachtwoord" required name="password" ngModel #passwordInput="ngModel">
         </mat-form-field>
       </mat-card-content>
