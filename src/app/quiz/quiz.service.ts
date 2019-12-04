@@ -5,9 +5,15 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SuccessComponent } from '../shared/success/success.component';
 import { ErrorComponent } from '../shared/error/error.component';
+import { Subject } from 'rxjs';
+import { Seizoen } from './seizoen.model';
 
 @Injectable({providedIn: 'root'})
 export class QuizService {
+  private quizzen: Quiz[] = [];
+  private seizoenen: Seizoen[] = [];
+  quizzenChanged = new Subject<Quiz[]>();
+  seizoenenChanged = new Subject<Seizoen[]>();
 
   constructor(
     private db: AngularFirestore,
@@ -24,4 +30,32 @@ export class QuizService {
         console.log(error.message);
       });
   }
+
+  getQuizzenBySeizoen(beginDatum: Date, eindDatum: Date) {
+    this.db.collection('quizzen', ref => ref.where('datum', '>=', beginDatum).where('datum', '<=', eindDatum).orderBy('datum', 'desc'))
+      .valueChanges({idField: 'id'})
+      .subscribe((data) => {
+        this.quizzen = data as Quiz[];
+        this.quizzenChanged.next([...this.quizzen]);
+      });
+  }
+
+  getQuizzen() {
+    this.db.collection('quizzen', ref => ref.orderBy('datum', 'desc'))
+      .valueChanges({idField: 'id'})
+      .subscribe((data) => {
+        this.quizzen = data as Quiz[];
+        this.quizzenChanged.next([...this.quizzen]);
+      });
+  }
+
+  getSeizoenen() {
+    this.db.collection('seizoenen', ref => ref.orderBy('begindatum', 'desc'))
+      .valueChanges({idField: 'id'})
+      .subscribe((data) => {
+        this.seizoenen = data as Seizoen[];
+        this.seizoenenChanged.next([...this.seizoenen]);
+      });
+  }
+
 }

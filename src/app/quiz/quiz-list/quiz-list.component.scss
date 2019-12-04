@@ -4,27 +4,126 @@ section {
   padding-top: 30px;
 }
 
-mat-card {
-  width: 1200px;
+mat-card, table {
+  box-sizing: border-box;
+  width: 1230px;
 }
 
 mat-form-field {
-  font-size: 16px!important;
+  // font-size: 14px!important;
   width: 250px;
 }
 
+table {
+  margin-top: 20px;
+}
+
+.span-title {
+  color:$primary-color;
+  font-weight: bold;
+}
+
+.mat-column-datum, .mat-column-uur {
+  white-space: nowrap;
+}
+
 @media only screen and (max-width: 1259px) {
-  mat-card {
-    width: 88%;
+  mat-card, table {
+    width: 92%;
   }
 }
+
 
 @media only screen and (max-width: 599px) {
   section {
     padding-top: 20px;
   }
 
+  mat-card, table {
+    width: 94%;
+  }
+
   mat-form-field {
-    width: 280px;
+    width: 100%;
+  }
+
+  table th, table td {
+    font-size: 12px!important;
+    padding-left: 10px;
+  }
+
+  .mat-column-expandedDetail {
+    padding-right: 10px!important;
+  }
+
+}
+
+
+
+tr.detail-row {
+  height: 0;
+}
+
+tr.element-row:not(.expanded-row):hover {
+  background: #777;
+  cursor: pointer;
+}
+
+tr.element-row:not(.expanded-row):active {
+  background: #efefef;
+}
+
+.element-row td {
+  border-bottom-width: 0;
+}
+
+.element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.quiz-detail {
+  margin-bottom: 5px;
+
+
+}
+
+.buttonsDiv {
+  border: 2px solid $primary-color;
+  border-radius: 10px;
+}
+
+.quizDetails {
+  padding-top: 5px;
+}
+
+.quizButtons {
+  border-top: 2px solid $primary-color;
+
+  button {
+    height:50px;
+    width: 50px;
+  }
+
+  mat-icon {
+    font-size: 32px;
   }
 }
+
+.gespeeld {
+  background-color: rgb(212, 231, 212);
+}
+
+.expanded-row td {
+  color: $primary-color;
+  font-weight: bold;
+  background-color: $primary-color-lightest;
+}
+
+.detail-row td {
+  border-bottom: 1px solid $primary-color!important;
+  background-color: $primary-color-lightest;
+}
+
+
+
