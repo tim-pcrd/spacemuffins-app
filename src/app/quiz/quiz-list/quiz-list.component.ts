@@ -4,6 +4,8 @@ import { Quiz } from '../quiz.model';
 import { Seizoen } from '../seizoen.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-quiz-list',
@@ -26,15 +28,13 @@ export class QuizListComponent implements OnInit {
   expandedElement: Quiz | null;
   dateNow;
 
-  constructor(private quizService: QuizService) { }
+  constructor(private quizService: QuizService, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.dateNow = new Date();
-    console.log(this.dateNow);
     this.quizService.quizzenChanged
     .subscribe(quizData => {
       this.quizzen.data = quizData;
-      console.log(quizData[0].datum);
     });
     this.quizService.seizoenenChanged
       .subscribe(seizoenData => {
@@ -55,7 +55,25 @@ export class QuizListComponent implements OnInit {
       .find(seizoen => this.selectedSeizoenValue === seizoen.id);
       this.quizService.getQuizzenBySeizoen(this.selectedSeizoen.begindatum, this.selectedSeizoen.einddatum);
     }
-    console.log(this.selectedSeizoen);
+  }
+
+  onDeleteQuiz(id) {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '280px',
+      data: {
+        text: 'Bent u zeker dat u deze quiz wilt verwijderen?',
+        false: 'ANNULEER',
+        true: 'VERWIJDER'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.quizService.deleteSeizoen(id);
+      }
+    });
+
+
   }
 
 }

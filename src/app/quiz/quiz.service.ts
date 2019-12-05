@@ -26,7 +26,7 @@ export class QuizService {
         this.snackBar.openFromComponent(SuccessComponent, {duration: 5000});
       })
       .catch(error => {
-        this.snackBar.openFromComponent(ErrorComponent, {duration: 5000});
+        this.snackBar.openFromComponent(ErrorComponent, {duration: 4000});
         console.log(error.message);
       });
   }
@@ -56,6 +56,13 @@ export class QuizService {
         this.seizoenen = data as Seizoen[];
         this.seizoenenChanged.next([...this.seizoenen]);
       });
+  }
+
+  deleteSeizoen(id) {
+    this.db.collection('quizzen').doc(id)
+      .ref.delete()
+      .then(() => this.snackBar.open('Succesvol verwijderd.', null, {duration: 4000}))
+      .catch(() => this.snackBar.openFromComponent(ErrorComponent, {duration: 4000}));
   }
 
 }

@@ -21,6 +21,7 @@ import { environment } from 'src/environments/environment';
 import { LoginComponent } from './auth/login/login.component';
 import { SuccessComponent } from './shared/success/success.component';
 import { ErrorComponent } from './shared/error/error.component';
+import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ErrorComponent } from './shared/error/error.component';
     QuizDetailComponent,
     LoginComponent,
     SuccessComponent,
-    ErrorComponent
+    ErrorComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +51,6 @@ import { ErrorComponent } from './shared/error/error.component';
   ],
   providers: [],
   entryComponents: [SuccessComponent, ErrorComponent],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, ConfirmationDialogComponent]
 })
 export class AppModule { }

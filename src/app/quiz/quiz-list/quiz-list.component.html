@@ -58,7 +58,7 @@
                           <a [href]="'https://www.google.com/maps/search/?api=1&query='+element.adres" target="_blank">{{element.adres}}</a>
 
                       </div>
-                      <div class="quiz-detail">
+                      <div class="quiz-detail" *ngIf="element.opmerkingen">
                         <span class="span-title">Opmerking: </span><br>
                         {{element.opmerkingen}}
                       </div>
@@ -77,32 +77,39 @@
                           {{element.tim === true ? ' Tim,' : ''}}
                           {{element.ward === true ? ' Ward' : ''}}<br>
                       </div>
-                      <div class="quiz-detail">
+                      <div class="quiz-detail" *ngIf="element.invallers.count > 0">
                           <span class="span-title">Invallers: </span><br>
                           <span *ngFor="let speler of element.invallers">{{speler + ', '}}</span>
                       </div>
                     </div>
 
                     <div>
-                      <div class="quiz-detail">
+                      <div class="quiz-detail" *ngIf="element.behaaldePunten && element.maxPunten">
                         <span class="span-title">Percentage: </span><br>
                         {{(element.behaaldePunten / element.maxPunten) * 100 | number : '1.2-2'}}%
                       </div>
 
-                      <div class="quiz-detail">
+                      <div class="quiz-detail" *ngIf="element.positie">
                         <span class="span-title">Positie: </span><br>
                         {{element.positie}}
                       </div>
 
-                      <div class="quiz-detail">
+                      <div class="quiz-detail" *ngIf="element.link">
                         <span class="span-title">Link: </span><br>
                         <a [href]="element.link" target="_blank">LosFlippos</a>
                       </div>
                     </div>
                 </div>
-                <div class="quizButtons" fxLayout>
-                    <button mat-icon-button color="primary" title="Bewerk"><mat-icon>edit</mat-icon></button>
-                    <button mat-icon-button color="warn" title="Verwijder"><mat-icon>clear</mat-icon></button>
+                <div class="quizButtons" fxLayout fxLayoutAlign="space-between">
+                  <div fxLayout fxLayoutAlign="space-between">
+                      <button mat-icon-button color="primary" title="Bewerk"><mat-icon>edit</mat-icon></button>
+                      <button mat-icon-button color="warn" title="Verwijder" (click)="onDeleteQuiz(element.id)"><mat-icon>clear</mat-icon></button>
+                  </div>
+                  <div fxLayout fxLayoutAlign="space-between">
+                      <button mat-icon-button color="primary" title="Spelers"><mat-icon>person</mat-icon></button>
+                      <button mat-icon-button color="primary" title="Resultaat"><mat-icon>assignment</mat-icon></button>
+                      <button mat-icon-button color="primary" title="Punten"><mat-icon>thumbs_up_down</mat-icon></button>
+                  </div>
                 </div>
 
             <!-- <div class="element-diagram">

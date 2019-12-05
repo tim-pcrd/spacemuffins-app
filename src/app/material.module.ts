@@ -20,6 +20,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 export const MY_FORMATS = {
@@ -55,7 +56,8 @@ registerLocaleData(localeBe);
     MatSnackBarModule,
     MatPaginatorModule,
     MatSortModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule
   ],
   exports: [
     MatSidenavModule,
@@ -75,7 +77,8 @@ registerLocaleData(localeBe);
     MatSnackBarModule,
     MatPaginatorModule,
     MatSortModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'nl-be'},
