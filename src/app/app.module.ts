@@ -56,7 +56,7 @@ import { PuntenDialogComponent } from './quiz/dialogs/punten-dialog/punten-dialo
     AngularFirestoreModule
   ],
   providers: [],
-  entryComponents: [SuccessComponent, ErrorComponent, ConfirmationDialogComponent],
+  entryComponents: [SuccessComponent, ErrorComponent, ConfirmationDialogComponent, SpelersDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

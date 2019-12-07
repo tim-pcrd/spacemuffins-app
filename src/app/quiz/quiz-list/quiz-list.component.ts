@@ -76,18 +76,22 @@ export class QuizListComponent implements OnInit {
   }
 
   onSpelersEdit(id) {
-    const selectedQuiz = this.quizzen.data.filter((quiz: Quiz) => quiz.id === id);
+    const selectedQuiz = this.quizzen.data.find((quiz: Quiz) => quiz.id === id) as Quiz;
     console.log(selectedQuiz);
-    // const dialogRef = this.dialog.open(SpelersDialogComponent, {
-    //   width: '250px',
-    //   data: {
+    const dialogRef = this.dialog.open(SpelersDialogComponent, {
+      width: '280px',
+      data: {
+        arno: selectedQuiz.arno,
+        bart: selectedQuiz.bart,
+        tim: selectedQuiz.tim,
+        ward: selectedQuiz.ward,
+        invallers: selectedQuiz.invallers
+      }
+    });
 
-    //   }
-    // });
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log('The dialog was closed');
-    // });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
   }
 
 }

@@ -1,13 +1,15 @@
 
-<div mat-dialog-content fxLayout="column" fxLayout="center center">
+<div mat-dialog-content fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="12px">
   <mat-icon color="primary">person_add</mat-icon>
-  <div class="checkboxes" fxLayout="row" fxLayoutAlign="space-between">
+  <div class="checkboxes" fxLayout="row" fxLayoutAlign="space-between" fxFlexAlign="stretch">
     <mat-checkbox color="primary" name="arno" [(ngModel)]="passedData.arno">
       Arno
     </mat-checkbox>
     <mat-checkbox color="primary" name="bart" [(ngModel)]="passedData.bart">
       Bart
     </mat-checkbox>
+  </div>
+   <div class="checkboxes" fxLayout="row" fxLayoutAlign="space-between" fxFlexAlign="stretch">
     <mat-checkbox color="primary" name="tim" [(ngModel)]="passedData.tim">
       Tim
     </mat-checkbox>
