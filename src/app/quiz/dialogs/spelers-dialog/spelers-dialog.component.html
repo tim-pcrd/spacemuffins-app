@@ -1,0 +1,37 @@
+
+<div mat-dialog-content fxLayout="column" fxLayout="center center">
+  <mat-icon color="primary">person_add</mat-icon>
+  <div class="checkboxes" fxLayout="row" fxLayoutAlign="space-between">
+    <mat-checkbox color="primary" name="arno" [(ngModel)]="passedData.arno">
+      Arno
+    </mat-checkbox>
+    <mat-checkbox color="primary" name="bart" [(ngModel)]="passedData.bart">
+      Bart
+    </mat-checkbox>
+    <mat-checkbox color="primary" name="tim" [(ngModel)]="passedData.tim">
+      Tim
+    </mat-checkbox>
+    <mat-checkbox color="primary" name="ward" [(ngModel)]="passedData.ward">
+      Ward
+    </mat-checkbox>
+  </div>
+  <mat-form-field appearance="outline">
+    <mat-label>Invallers</mat-label>
+    <mat-chip-list #chipList aria-label="Invallers">
+      <mat-chip *ngFor="let invaller of invallers" [selectable]="selectable"
+                [removable]="removable" (removed)="removeInvaller(invaller)">
+        {{invaller}}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+      <input
+              [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="addInvaller($event)">
+    </mat-chip-list>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions fxLayout fxLayoutAlign="center">
+  <button mat-raised-button (click)="onAnnuleer()">ANNULEER</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="passedData">OPSLAAN</button>
+</div>

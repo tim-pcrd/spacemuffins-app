@@ -22,6 +22,9 @@ import { LoginComponent } from './auth/login/login.component';
 import { SuccessComponent } from './shared/success/success.component';
 import { ErrorComponent } from './shared/error/error.component';
 import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confirmation-dialog.component';
+import { SpelersDialogComponent } from './quiz/dialogs/spelers-dialog/spelers-dialog.component';
+import { ResultaatDialogComponent } from './quiz/dialogs/resultaat-dialog/resultaat-dialog.component';
+import { PuntenDialogComponent } from './quiz/dialogs/punten-dialog/punten-dialog.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,10 @@ import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confir
     LoginComponent,
     SuccessComponent,
     ErrorComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    SpelersDialogComponent,
+    ResultaatDialogComponent,
+    PuntenDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +56,7 @@ import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confir
     AngularFirestoreModule
   ],
   providers: [],
-  entryComponents: [SuccessComponent, ErrorComponent],
-  bootstrap: [AppComponent, ConfirmationDialogComponent]
+  entryComponents: [SuccessComponent, ErrorComponent, ConfirmationDialogComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

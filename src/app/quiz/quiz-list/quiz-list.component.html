@@ -70,14 +70,14 @@
                         <span class="span-title"># spelers: </span>
                         {{element.aantalSpelers}}
                       </div>
-                      <div class="quiz-detail">
+                      <div class="quiz-detail" *ngIf="element.arno || element.bart || element.tim || element.ward">
                           <span class="span-title">Spelers: </span><br>
                           {{element.arno === true ? ' Arno,' : ''}}
                           {{element.bart === true ? ' Bart,' : ''}}
                           {{element.tim === true ? ' Tim,' : ''}}
                           {{element.ward === true ? ' Ward' : ''}}<br>
                       </div>
-                      <div class="quiz-detail" *ngIf="element.invallers.count > 0">
+                      <div class="quiz-detail" *ngIf="element.invallers.length > 0">
                           <span class="span-title">Invallers: </span><br>
                           <span *ngFor="let speler of element.invallers">{{speler + ', '}}</span>
                       </div>
@@ -106,7 +106,7 @@
                       <button mat-icon-button color="warn" title="Verwijder" (click)="onDeleteQuiz(element.id)"><mat-icon>clear</mat-icon></button>
                   </div>
                   <div fxLayout fxLayoutAlign="space-between">
-                      <button mat-icon-button color="primary" title="Spelers"><mat-icon>person</mat-icon></button>
+                      <button mat-icon-button color="primary" title="Spelers" (click)="onSpelersEdit(element.id)"><mat-icon>person_add</mat-icon></button>
                       <button mat-icon-button color="primary" title="Resultaat"><mat-icon>assignment</mat-icon></button>
                       <button mat-icon-button color="primary" title="Punten"><mat-icon>thumbs_up_down</mat-icon></button>
                   </div>

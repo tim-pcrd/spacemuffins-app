@@ -23,10 +23,10 @@ export class QuizService {
   addQuiz(quiz: Quiz) {
     this.db.collection('quizzen').add(quiz)
       .then(data => {
-        this.snackBar.openFromComponent(SuccessComponent, {duration: 5000});
+        this.snackBar.openFromComponent(SuccessComponent, {duration: 4000});
       })
       .catch(error => {
-        this.snackBar.openFromComponent(ErrorComponent, {duration: 4000});
+        this.snackBar.openFromComponent(ErrorComponent, {duration: 3000});
         console.log(error.message);
       });
   }
@@ -61,8 +61,8 @@ export class QuizService {
   deleteSeizoen(id) {
     this.db.collection('quizzen').doc(id)
       .ref.delete()
-      .then(() => this.snackBar.open('Succesvol verwijderd.', null, {duration: 4000}))
-      .catch(() => this.snackBar.openFromComponent(ErrorComponent, {duration: 4000}));
+      .then(() => this.snackBar.open('Succesvol verwijderd.', null, {duration: 3000}))
+      .catch(() => this.snackBar.openFromComponent(ErrorComponent, {duration: 3000}));
   }
 
 }

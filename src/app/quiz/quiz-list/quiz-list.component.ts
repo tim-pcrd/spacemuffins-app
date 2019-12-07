@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog/confirmation-dialog.component';
+import { SpelersDialogComponent } from '../dialogs/spelers-dialog/spelers-dialog.component';
 
 @Component({
   selector: 'app-quiz-list',
@@ -31,7 +32,7 @@ export class QuizListComponent implements OnInit {
   constructor(private quizService: QuizService, private dialog: MatDialog) { }
 
   ngOnInit() {
-    this.dateNow = new Date();
+    this.dateNow = new Date(new Date().toDateString());
     this.quizService.quizzenChanged
     .subscribe(quizData => {
       this.quizzen.data = quizData;
@@ -72,8 +73,21 @@ export class QuizListComponent implements OnInit {
         this.quizService.deleteSeizoen(id);
       }
     });
+  }
 
+  onSpelersEdit(id) {
+    const selectedQuiz = this.quizzen.data.filter((quiz: Quiz) => quiz.id === id);
+    console.log(selectedQuiz);
+    // const dialogRef = this.dialog.open(SpelersDialogComponent, {
+    //   width: '250px',
+    //   data: {
 
+    //   }
+    // });
+
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log('The dialog was closed');
+    // });
   }
 
 }

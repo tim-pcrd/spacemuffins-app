@@ -4,6 +4,6 @@
   <p>{{passedData.text}}</p>
 </div>
 <div mat-dialog-actions fxLayout fxLayoutAlign="center">
-  <button mat-raised-button [mat-dialog-close]="false">{{passedData.false}}</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="false" cdkFocusInitial>{{passedData.false}}</button>
   <button mat-raised-button color="warn" [mat-dialog-close]="true" cdkFocusInitial>{{passedData.true}}</button>
 </div>
