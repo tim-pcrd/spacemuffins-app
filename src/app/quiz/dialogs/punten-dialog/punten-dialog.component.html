@@ -1,1 +1,21 @@
-<p>punten-dialog works!</p>
+<mat-vertical-stepper [linear]="false">
+    <mat-step *ngFor="let speler of [].constructor(passedData.aantalSpelers), let i = index">
+      <form>
+        <ng-template matStepLabel>Speler {{i+1}}</ng-template>
+        <mat-form-field>
+          <input type="number" matInput placeholder="Punten" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      You are now done.
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button>Reset</button>
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>

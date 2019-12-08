@@ -1,21 +1,24 @@
 
-<div mat-dialog-content fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="12px">
-  <mat-icon color="primary">person_add</mat-icon>
-  <div class="checkboxes" fxLayout="row" fxLayoutAlign="space-between" fxFlexAlign="stretch">
-    <mat-checkbox color="primary" name="arno" [(ngModel)]="passedData.arno">
-      Arno
-    </mat-checkbox>
-    <mat-checkbox color="primary" name="bart" [(ngModel)]="passedData.bart">
-      Bart
-    </mat-checkbox>
-  </div>
-   <div class="checkboxes" fxLayout="row" fxLayoutAlign="space-between" fxFlexAlign="stretch">
-    <mat-checkbox color="primary" name="tim" [(ngModel)]="passedData.tim">
-      Tim
-    </mat-checkbox>
-    <mat-checkbox color="primary" name="ward" [(ngModel)]="passedData.ward">
-      Ward
-    </mat-checkbox>
+<div mat-dialog-content fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="25px">
+  <h2>Spelers</h2>
+  <p>({{passedData.quizTitle}})</p>
+  <div class="checkboxes" fxLayout="row" fxLayoutGap="50px">
+    <div fxLayout="column" fxLayoutGap="25px">
+      <mat-checkbox color="primary" name="arno" [(ngModel)]="passedData.arno">
+          Arno
+        </mat-checkbox>
+        <mat-checkbox color="primary" name="tim" [(ngModel)]="passedData.tim">
+          Tim
+        </mat-checkbox>
+    </div>
+    <div fxLayout="column" fxLayoutGap="25px">
+        <mat-checkbox color="primary" name="bart" [(ngModel)]="passedData.bart">
+          Bart
+        </mat-checkbox>
+        <mat-checkbox color="primary" name="ward" [(ngModel)]="passedData.ward">
+          Ward
+        </mat-checkbox>
+    </div>
   </div>
   <mat-form-field appearance="outline">
     <mat-label>Invallers</mat-label>

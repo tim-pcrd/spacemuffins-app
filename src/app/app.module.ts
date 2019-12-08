@@ -23,7 +23,6 @@ import { SuccessComponent } from './shared/success/success.component';
 import { ErrorComponent } from './shared/error/error.component';
 import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confirmation-dialog.component';
 import { SpelersDialogComponent } from './quiz/dialogs/spelers-dialog/spelers-dialog.component';
-import { ResultaatDialogComponent } from './quiz/dialogs/resultaat-dialog/resultaat-dialog.component';
 import { PuntenDialogComponent } from './quiz/dialogs/punten-dialog/punten-dialog.component';
 
 @NgModule({
@@ -41,7 +40,6 @@ import { PuntenDialogComponent } from './quiz/dialogs/punten-dialog/punten-dialo
     ErrorComponent,
     ConfirmationDialogComponent,
     SpelersDialogComponent,
-    ResultaatDialogComponent,
     PuntenDialogComponent
   ],
   imports: [
@@ -56,7 +54,13 @@ import { PuntenDialogComponent } from './quiz/dialogs/punten-dialog/punten-dialo
     AngularFirestoreModule
   ],
   providers: [],
-  entryComponents: [SuccessComponent, ErrorComponent, ConfirmationDialogComponent, SpelersDialogComponent],
+  entryComponents: [
+    SuccessComponent,
+    ErrorComponent,
+    ConfirmationDialogComponent,
+    SpelersDialogComponent,
+    PuntenDialogComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

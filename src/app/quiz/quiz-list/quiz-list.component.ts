@@ -7,6 +7,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog/confirmation-dialog.component';
 import { SpelersDialogComponent } from '../dialogs/spelers-dialog/spelers-dialog.component';
+import { PuntenDialogComponent } from '../dialogs/punten-dialog/punten-dialog.component';
 
 @Component({
   selector: 'app-quiz-list',
@@ -70,27 +71,40 @@ export class QuizListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.quizService.deleteSeizoen(id);
+        this.quizService.deleteQuiz(id);
       }
     });
   }
 
   onSpelersEdit(id) {
     const selectedQuiz = this.quizzen.data.find((quiz: Quiz) => quiz.id === id) as Quiz;
-    console.log(selectedQuiz);
     const dialogRef = this.dialog.open(SpelersDialogComponent, {
-      width: '280px',
+      width: '300px',
       data: {
+        quizTitle: selectedQuiz.naam,
         arno: selectedQuiz.arno,
         bart: selectedQuiz.bart,
         tim: selectedQuiz.tim,
         ward: selectedQuiz.ward,
-        invallers: selectedQuiz.invallers
+        invallers: [...selectedQuiz.invallers]
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      if (result) {
+        delete result.quizTitle;
+        this.quizService.updateQuiz(selectedQuiz.id, result);
+      }
+    });
+  }
+
+  onPuntenEdit(id) {
+    const selectedQuiz = this.quizzen.data.find((quiz: Quiz) => quiz.id === id) as Quiz;
+    const dialogRef = this.dialog.open(PuntenDialogComponent, {
+      width: '300px',
+      data: {
+        aantalSpelers: selectedQuiz.aantalSpelers
+      }
     });
   }
 

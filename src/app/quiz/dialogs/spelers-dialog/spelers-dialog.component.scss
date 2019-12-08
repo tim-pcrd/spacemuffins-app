@@ -1,6 +1,24 @@
+@import '../../../../variables';
 
-mat-icon {
-  font-size: 40px;
+mat-checkbox {
+  font-size: 20px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+h2, p {
+  margin-top: 0;
+  color: $primary-color;
+}
+
+p {
+  font-size: 0.9rem;
+}
+
+h2 {
+  margin-bottom: 0!important;
 }
 
 @media only screen and (max-width: 340px) {
