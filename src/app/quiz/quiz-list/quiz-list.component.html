@@ -22,7 +22,7 @@
   </div>
 
 
-  <div class="tableDiv" fxLayout fxLayoutAlign="center">
+  <div class="tableDiv" fxLayout="column" fxLayoutAlign="center center">
     <table mat-table
       [dataSource]="quizzen" multiTemplateDataRows
       class="mat-elevation-z8">
@@ -43,7 +43,22 @@
 
       <ng-container  matColumnDef="aantalSpelers">
         <th fxHide.xs mat-header-cell *matHeaderCellDef># spelers </th>
-        <td fxHide.xs mat-cell *matCellDef="let element"> {{element.aantalSpelers}}</td>
+        <td fxHide.xs mat-cell *matCellDef="let element">
+          <mat-chip [ngClass]="{'chip-green': element.aantalSpelersAanwezig === element.aantalSpelers, 'chip-red': element.aantalSpelersAanwezig > element.aantalSpelers}" >
+              {{element.aantalSpelersAanwezig}}/{{element.aantalSpelers}}
+          </mat-chip>
+
+        </td>
+      </ng-container>
+
+      <ng-container  matColumnDef="spelers">
+        <th fxHide.lt-md mat-header-cell *matHeaderCellDef>Spelers </th>
+        <td fxHide.lt-md mat-cell *matCellDef="let element">
+          {{element.arno === true ? ' Arno,' : ''}}
+          {{element.bart === true ? ' Bart,' : ''}}
+          {{element.tim === true ? ' Tim,' : ''}}
+          {{element.ward === true ? ' Ward' : ''}}
+        </td>
       </ng-container>
 
       <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
@@ -68,9 +83,11 @@
                     <div fxFlex.lt-md="160px" fxFlex.xs="85px" fxFlex.gt-sm="270px">
                       <div fxHide.gt-xs class="quiz-detail">
                         <span class="span-title"># spelers: </span>
-                        {{element.aantalSpelers}}
+                        <span [ngClass]="{'span-green': element.aantalSpelersAanwezig === element.aantalSpelers, 'span-red': element.aantalSpelersAanwezig > element.aantalSpelers}">
+                          {{element.aantalSpelersAanwezig}}/{{element.aantalSpelers}}
+                        </span>
                       </div>
-                      <div class="quiz-detail" *ngIf="element.arno || element.bart || element.tim || element.ward">
+                      <div fxHide.gt-sm class="quiz-detail" *ngIf="element.arno || element.bart || element.tim || element.ward">
                           <span class="span-title">Spelers: </span><br>
                           {{element.arno === true ? ' Arno,' : ''}}
                           {{element.bart === true ? ' Bart,' : ''}}
@@ -107,7 +124,7 @@
                   </div>
                   <div fxLayout fxLayoutAlign="space-between">
                       <button mat-icon-button color="primary" title="Spelers" (click)="onSpelersEdit(element.id)"><mat-icon>person_add</mat-icon></button>
-                      <button mat-icon-button color="primary" title="Punten" (click)="onPuntenEdit(element.id)"><mat-icon>thumbs_up_down</mat-icon></button>
+                      <button mat-icon-button color="primary" title="Score" (click)="onPuntenEdit(element.id)"><mat-icon>thumbs_up_down</mat-icon></button>
                   </div>
                 </div>
 
@@ -134,5 +151,9 @@
       </tr>
       <tr mat-row *matRowDef="let row; columns: ['expandedDetail']"  class="detail-row"></tr>
     </table>
+    <mat-paginator showFirstLastButtons
+              [pageSize]="10"
+              [pageSizeOptions]="[10, 20, 50]">
+    </mat-paginator>
   </div>
 </section>

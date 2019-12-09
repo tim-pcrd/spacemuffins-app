@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { QuizService } from '../quiz.service';
 import { Quiz } from '../quiz.model';
 import { Seizoen } from '../seizoen.model';
@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog/confirmation-dialog.component';
 import { SpelersDialogComponent } from '../dialogs/spelers-dialog/spelers-dialog.component';
 import { PuntenDialogComponent } from '../dialogs/punten-dialog/punten-dialog.component';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-quiz-list',
@@ -21,14 +22,15 @@ import { PuntenDialogComponent } from '../dialogs/punten-dialog/punten-dialog.co
     ]),
   ],
 })
-export class QuizListComponent implements OnInit {
+export class QuizListComponent implements OnInit, AfterViewInit {
   quizzen = new MatTableDataSource();
   seizoenen: Seizoen[] = [];
   selectedSeizoen: Seizoen;
   selectedSeizoenValue;
-  displayedColumns = ['datum', 'naam', 'uur', 'aantalSpelers'];
+  displayedColumns = ['datum', 'naam', 'uur', 'aantalSpelers', 'spelers'];
   expandedElement: Quiz | null;
   dateNow;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(private quizService: QuizService, private dialog: MatDialog) { }
 
@@ -47,6 +49,10 @@ export class QuizListComponent implements OnInit {
       });
 
     this.quizService.getSeizoenen();
+  }
+
+  ngAfterViewInit() {
+    this.quizzen.paginator = this.paginator;
   }
 
   onChange() {

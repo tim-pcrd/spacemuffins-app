@@ -35,7 +35,14 @@ export class QuizService {
     this.db.collection('quizzen', ref => ref.where('datum', '>=', beginDatum).where('datum', '<=', eindDatum).orderBy('datum', 'desc'))
       .valueChanges({idField: 'id'})
       .subscribe((data) => {
-        this.quizzen = data as Quiz[];
+        const quizData: Quiz[] = [];
+        data.forEach(quiz => {
+          quizData.push({
+            ...quiz as Quiz,
+            aantalSpelersAanwezig: this.getAantalSpelers(quiz)
+          });
+        });
+        this.quizzen = quizData;
         this.quizzenChanged.next([...this.quizzen]);
       });
   }
@@ -44,7 +51,14 @@ export class QuizService {
     this.db.collection('quizzen', ref => ref.orderBy('datum', 'desc'))
       .valueChanges({idField: 'id'})
       .subscribe((data) => {
-        this.quizzen = data as Quiz[];
+        const quizData: Quiz[] = [];
+        data.forEach(quiz => {
+          quizData.push({
+            ...quiz as Quiz,
+            aantalSpelersAanwezig: this.getAantalSpelers(quiz)
+          });
+        });
+        this.quizzen = quizData;
         this.quizzenChanged.next([...this.quizzen]);
       });
   }
@@ -70,6 +84,27 @@ export class QuizService {
       .update(data)
       .then(() => this.snackBar.open('Succesvol opgeslagen', null, {duration: 3000}))
       .catch(() =>  this.snackBar.openFromComponent(ErrorComponent, {duration: 3000}));
+  }
+
+  getAantalSpelers(quiz) {
+    let aantal = 0;
+    if (quiz.arno) {
+      aantal += 1;
+    }
+    if (quiz.bart) {
+      aantal += 1;
+    }
+    if (quiz.tim) {
+      aantal += 1;
+    }
+    if (quiz.ward) {
+      aantal += 1;
+    }
+    if (quiz.invallers.length > 0) {
+      aantal += quiz.invallers.length;
+    }
+
+    return aantal;
   }
 
 }

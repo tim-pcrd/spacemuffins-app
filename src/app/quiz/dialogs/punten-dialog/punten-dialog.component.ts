@@ -1,11 +1,12 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SpelersDialogComponent } from '../spelers-dialog/spelers-dialog.component';
 
 @Component({
   selector: 'app-punten-dialog',
   templateUrl: './punten-dialog.component.html',
-  styleUrls: ['./punten-dialog.component.scss']
+  styleUrls: ['./punten-dialog.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class PuntenDialogComponent implements OnInit {
 

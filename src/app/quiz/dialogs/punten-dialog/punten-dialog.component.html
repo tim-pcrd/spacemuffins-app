@@ -1,21 +1,33 @@
 <mat-vertical-stepper [linear]="false">
     <mat-step *ngFor="let speler of [].constructor(passedData.aantalSpelers), let i = index">
-      <form>
         <ng-template matStepLabel>Speler {{i+1}}</ng-template>
-        <mat-form-field>
-          <input type="number" matInput placeholder="Punten" required>
-        </mat-form-field>
+
+        <mat-slider
+        color="primary"
+          class="example-margin"
+          max="10"
+          min="0"
+          step="1"
+          thumbLabel>
+        </mat-slider>
+        <!-- <mat-form-field>
+            <mat-label>Favorite food</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let number of [0,1,2,3,4,5,6,7,8,9,10]" [value]="number">
+                {{number}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field> -->
         <div>
-          <button mat-button matStepperNext>Next</button>
+          <button mat-raised-button color="primary" matStepperNext>Volgende Speler</button>
         </div>
-      </form>
     </mat-step>
     <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      You are now done.
+      <ng-template matStepLabel>Score</ng-template>
+      Gemiddelde score:
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button>Reset</button>
+          <button mat-raised-button>ANNULEER</button>&nbsp;
+          <button mat-raised-button color="primary">OPSLAAN</button>
       </div>
     </mat-step>
   </mat-vertical-stepper>

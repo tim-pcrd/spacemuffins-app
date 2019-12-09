@@ -10,6 +10,7 @@ export interface Quiz {
   tim: boolean;
   ward: boolean;
   invallers?: string[];
+  aantalSpelersAanwezig?: number;
   opmerkingen?: string;
   behaaldePunten?: number;
   maxPunten?: number;

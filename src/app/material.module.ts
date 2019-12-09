@@ -22,6 +22,7 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatSliderModule} from '@angular/material/slider';
 
 
 export const MY_FORMATS = {
@@ -59,7 +60,8 @@ registerLocaleData(localeBe);
     MatSortModule,
     MatTableModule,
     MatDialogModule,
-    MatStepperModule
+    MatStepperModule,
+    MatSliderModule
   ],
   exports: [
     MatSidenavModule,
@@ -81,7 +83,8 @@ registerLocaleData(localeBe);
     MatSortModule,
     MatTableModule,
     MatDialogModule,
-    MatStepperModule
+    MatStepperModule,
+    MatSliderModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'nl-be'},

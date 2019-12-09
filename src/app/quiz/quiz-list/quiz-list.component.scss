@@ -4,7 +4,7 @@ section {
   padding-top: 30px;
 }
 
-mat-card, table {
+mat-card, table, mat-paginator  {
   box-sizing: border-box;
   width: 1230px;
 }
@@ -28,8 +28,8 @@ table {
 }
 
 @media only screen and (max-width: 1259px) {
-  mat-card, table {
-    width: 92%;
+  mat-card, table, mat-paginator {
+    width: 93%;
   }
 }
 
@@ -39,8 +39,8 @@ table {
     padding-top: 20px;
   }
 
-  mat-card, table {
-    width: 94%;
+  mat-card, table, mat-paginator {
+    width: 95%;
   }
 
   mat-form-field {
@@ -131,6 +131,28 @@ tr.element-row:not(.expanded-row):active {
 .detail-row td {
   border-bottom: 1px solid $primary-color!important;
   background-color: $primary-color-lightest;
+}
+
+.chip-red {
+  background-color: rgb(247, 86, 86)!important;
+}
+
+.chip-green {
+  background-color: lightgreen!important;
+}
+
+.span-green {
+  background-color:lightgreen;
+  padding: 2px;
+  border: 1px solid lightgreen;
+  border-radius: 8px;
+}
+
+.span-red {
+  background-color:rgb(247, 86, 86);
+  padding: 2px;
+  border: 1px solid rgb(247, 86, 86);
+  border-radius: 8px;
 }
 
 
