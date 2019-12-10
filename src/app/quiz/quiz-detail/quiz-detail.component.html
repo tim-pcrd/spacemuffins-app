@@ -1,1 +1,115 @@
-<p>quiz-detail works!</p>
+<section>
+  <form fxLayout fxLayoutAlign="center" [formGroup]="quizForm">
+    <mat-card>
+      <mat-card-header fxLayout="column" fxLayoutAlign="center center">
+          <mat-card-title>Gegevens</mat-card-title>
+      </mat-card-header>
+      <mat-card-content fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="12px">
+        <mat-form-field appearance="outline">
+          <mat-label>Naam</mat-label>
+          <textarea type="text" matInput rows="2" formControlName="naam"></textarea>
+          <!-- <mat-error>Verplicht veld</mat-error> -->
+        </mat-form-field>
+<!--
+        <mat-form-field appearance="outline">
+          <mat-label>Adres</mat-label>
+          <textarea type="text" matInput rows="3" formControlName="adres"></textarea>
+          <mat-error>Verplicht veld</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Kies een datum</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="datum">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker touchUi #picker></mat-datepicker>
+          <mat-error>Verplicht veld</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Uur</mat-label>
+          <mat-select name="uur" formControlName="uur">
+            <mat-option [value]="'19.00'">
+              19.00
+            </mat-option>
+            <mat-option [value]="'19.30'">
+              19.30
+            </mat-option>
+            <mat-option [value]="'20.00'">
+              20.00
+            </mat-option>
+            <mat-option [value]="'20.30'">
+              20.30
+            </mat-option>
+            <mat-option [value]="'21.00'">
+              21.00
+            </mat-option>
+          </mat-select>
+          <mat-error>Verplicht veld</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Aantal spelers</mat-label>
+          <mat-select name="aantalSpelers" >
+            <mat-option [value]="2">
+              2
+            </mat-option>
+            <mat-option [value]="3">
+              3
+            </mat-option>
+            <mat-option [value]="4">
+              4
+            </mat-option>
+            <mat-option [value]="5">
+              5
+            </mat-option>
+            <mat-option [value]="6">
+              6
+            </mat-option>
+          </mat-select>
+          <mat-error>Verplicht veld</mat-error>
+        </mat-form-field>
+
+        <div class="checkboxes" fxLayout="row" fxLayoutAlign="space-between">
+          <mat-checkbox color="primary">
+            Arno
+          </mat-checkbox>
+          <mat-checkbox color="primary">
+            Bart
+          </mat-checkbox>
+          <mat-checkbox color="primary">
+            Tim
+          </mat-checkbox>
+          <mat-checkbox color="primary">
+            Ward
+          </mat-checkbox>
+        </div> -->
+
+        <!-- <mat-form-field appearance="outline">
+          <mat-label>Invallers</mat-label>
+          <mat-chip-list #chipList aria-label="Invallers">
+            <mat-chip *ngFor="let invaller of invallers" [selectable]="selectable"
+                      [removable]="removable" (removed)="removeInvaller(invaller)">
+              {{invaller}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input
+                    [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="addInvaller($event)">
+          </mat-chip-list>
+        </mat-form-field> -->
+<!--
+        <mat-form-field appearance="outline">
+          <mat-label>Opmerkingen</mat-label>
+          <textarea matInput rows="3" name="opmerkingen"></textarea>
+        </mat-form-field> -->
+
+        <div fxLayout fxLayout="center" fxLayoutGap="10px">
+          <button mat-raised-button color="primary" type="submit">OPSLAAN</button>
+          <button mat-raised-button color="warn" type="button">ANNULEER</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</section>

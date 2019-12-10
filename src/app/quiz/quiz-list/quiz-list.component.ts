@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { QuizService } from '../quiz.service';
 import { Quiz } from '../quiz.model';
 import { Seizoen } from '../seizoen.model';

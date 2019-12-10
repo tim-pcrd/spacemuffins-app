@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SuccessComponent } from '../shared/success/success.component';
 import { ErrorComponent } from '../shared/error/error.component';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { Seizoen } from './seizoen.model';
 
 @Injectable({providedIn: 'root'})
@@ -61,6 +61,10 @@ export class QuizService {
         this.quizzen = quizData;
         this.quizzenChanged.next([...this.quizzen]);
       });
+  }
+
+  getQuiz(id) {
+    return this.db.collection('quizzen').doc(id).valueChanges() as Observable<Quiz>;
   }
 
   getSeizoenen() {

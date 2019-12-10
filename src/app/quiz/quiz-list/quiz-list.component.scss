@@ -155,5 +155,9 @@ tr.element-row:not(.expanded-row):active {
   border-radius: 8px;
 }
 
+tr:not(.expanded-row):hover {
+  background: rgb(231, 231, 231)!important;
+}
+
 
 

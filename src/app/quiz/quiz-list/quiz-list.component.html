@@ -119,7 +119,7 @@
                 </div>
                 <div class="quizButtons" fxLayout fxLayoutAlign="space-between">
                   <div fxLayout fxLayoutAlign="space-between">
-                      <button mat-icon-button color="primary" title="Bewerk"><mat-icon>edit</mat-icon></button>
+                      <a [routerLink]="[element.id]" mat-icon-button color="primary" title="Bewerk"><mat-icon>edit</mat-icon></a>
                       <button mat-icon-button color="warn" title="Verwijder" (click)="onDeleteQuiz(element.id)"><mat-icon>clear</mat-icon></button>
                   </div>
                   <div fxLayout fxLayoutAlign="space-between">

@@ -14,7 +14,8 @@ export interface Quiz {
   opmerkingen?: string;
   behaaldePunten?: number;
   maxPunten?: number;
-  positie?: string;
+  positie?: number;
+  aantalPloegen?: number;
   score?: number;
   link?: string;
 }
