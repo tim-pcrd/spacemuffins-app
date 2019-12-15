@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { QuizService } from '../quiz.service';
 import { Quiz } from '../quiz.model';
 import { Seizoen } from '../seizoen.model';
@@ -9,6 +9,8 @@ import { ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog/
 import { SpelersDialogComponent } from '../dialogs/spelers-dialog/spelers-dialog.component';
 import { PuntenDialogComponent } from '../dialogs/punten-dialog/punten-dialog.component';
 import { MatPaginator } from '@angular/material/paginator';
+import { switchMap, take } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-quiz-list',
@@ -22,7 +24,7 @@ import { MatPaginator } from '@angular/material/paginator';
     ]),
   ],
 })
-export class QuizListComponent implements OnInit, AfterViewInit {
+export class QuizListComponent implements OnInit, AfterViewInit, OnDestroy {
   quizzen = new MatTableDataSource();
   seizoenen: Seizoen[] = [];
   selectedSeizoen: Seizoen;
@@ -31,22 +33,14 @@ export class QuizListComponent implements OnInit, AfterViewInit {
   expandedElement: Quiz | null;
   dateNow;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  private quizSub: Subscription;
+  private seizoenSub: Subscription;
 
   constructor(private quizService: QuizService, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.dateNow = new Date(new Date().toDateString());
-    this.quizService.quizzenChanged
-    .subscribe(quizData => {
-      this.quizzen.data = quizData;
-    });
-    this.quizService.seizoenenChanged
-      .subscribe(seizoenData => {
-        this.seizoenen = seizoenData;
-        this.selectedSeizoen = this.seizoenen[0];
-        this.selectedSeizoenValue = this.selectedSeizoen.id;
-        this.quizService.getQuizzenBySeizoen(this.selectedSeizoen.begindatum, this.selectedSeizoen.einddatum);
-      });
+    this.seizoenSub = this.seizoenSubscription();
 
     this.quizService.getSeizoenen();
   }
@@ -57,11 +51,32 @@ export class QuizListComponent implements OnInit, AfterViewInit {
 
   onChange() {
     if (this.selectedSeizoenValue === 'all') {
-      this.quizService.getQuizzen();
+      this.quizService.getQuizzenFromDb()
+        .pipe(
+          take(1)
+        )
+        .subscribe(quizData => {
+          this.quizzen.data = this.quizService.getQuizzen(quizData);
+        });
     } else {
+
       this.selectedSeizoen = this.seizoenen
-      .find(seizoen => this.selectedSeizoenValue === seizoen.id);
-      this.quizService.getQuizzenBySeizoen(this.selectedSeizoen.begindatum, this.selectedSeizoen.einddatum);
+        .find(seizoen => this.selectedSeizoenValue === seizoen.id);
+
+
+      if (this.selectedSeizoen.id !== this.seizoenen[0].id) {
+        this.quizSub.unsubscribe();
+      } else if (this.quizSub.closed) {
+        this.quizSub = this.quizSubscription(this.selectedSeizoen);
+      }
+
+      this.quizService.getQuizzenBySeizoenFromDb(this.selectedSeizoen.begindatum, this.selectedSeizoen.einddatum)
+        .pipe(
+          take(1)
+        )
+        .subscribe(quizData => {
+          this.quizzen.data = this.quizService.getQuizzen(quizData);
+        });
     }
   }
 
@@ -113,5 +128,29 @@ export class QuizListComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
+  seizoenSubscription() {
+    return this.quizService.seizoenenChanged.subscribe(seizoenData => {
+      this.seizoenen = seizoenData;
+      this.selectedSeizoen = this.seizoenen[0];
+      this.selectedSeizoenValue = this.selectedSeizoen.id;
+
+      this.quizSub = this.quizSubscription(this.selectedSeizoen);
+
+    });
+  }
+
+  quizSubscription(seizoen) {
+    return this.quizService.getQuizzenBySeizoenFromDb(seizoen.begindatum, seizoen.einddatum)
+    .subscribe(quizData => {
+      this.quizzen.data = this.quizService.getQuizzen(quizData);
+    });
+  }
+
+  ngOnDestroy() {
+    this.quizSub.unsubscribe();
+    this.seizoenSub.unsubscribe();
+  }
+
 
 }

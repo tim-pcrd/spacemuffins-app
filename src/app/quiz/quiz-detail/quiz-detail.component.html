@@ -1,4 +1,4 @@
-<section>
+<section class="main">
   <form fxLayout fxLayoutAlign="center" [formGroup]="quizForm">
     <mat-card>
       <mat-card-header fxLayout="column" fxLayoutAlign="center center">
@@ -8,9 +8,9 @@
         <mat-form-field appearance="outline">
           <mat-label>Naam</mat-label>
           <textarea type="text" matInput rows="2" formControlName="naam"></textarea>
-          <!-- <mat-error>Verplicht veld</mat-error> -->
+          <mat-error>Verplicht veld</mat-error>
         </mat-form-field>
-<!--
+
         <mat-form-field appearance="outline">
           <mat-label>Adres</mat-label>
           <textarea type="text" matInput rows="3" formControlName="adres"></textarea>
@@ -49,7 +49,7 @@
 
         <mat-form-field appearance="outline">
           <mat-label>Aantal spelers</mat-label>
-          <mat-select name="aantalSpelers" >
+          <mat-select name="aantalSpelers" formControlName="aantalSpelers">
             <mat-option [value]="2">
               2
             </mat-option>
@@ -69,20 +69,22 @@
           <mat-error>Verplicht veld</mat-error>
         </mat-form-field>
 
+
+
         <div class="checkboxes" fxLayout="row" fxLayoutAlign="space-between">
-          <mat-checkbox color="primary">
+          <mat-checkbox color="primary" formControlName="arno">
             Arno
           </mat-checkbox>
-          <mat-checkbox color="primary">
+          <mat-checkbox color="primary" formControlName="bart">
             Bart
           </mat-checkbox>
-          <mat-checkbox color="primary">
+          <mat-checkbox color="primary" formControlName="tim">
             Tim
           </mat-checkbox>
-          <mat-checkbox color="primary">
+          <mat-checkbox color="primary" formControlName="ward">
             Ward
           </mat-checkbox>
-        </div> -->
+        </div>
 
         <!-- <mat-form-field appearance="outline">
           <mat-label>Invallers</mat-label>
@@ -106,8 +108,8 @@
         </mat-form-field> -->
 
         <div fxLayout fxLayout="center" fxLayoutGap="10px">
-          <button mat-raised-button color="primary" type="submit">OPSLAAN</button>
           <button mat-raised-button color="warn" type="button">ANNULEER</button>
+          <button mat-raised-button color="primary" type="submit">OPSLAAN</button>
         </div>
       </mat-card-content>
     </mat-card>

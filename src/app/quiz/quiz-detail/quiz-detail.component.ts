@@ -32,11 +32,10 @@ export class QuizDetailComponent implements OnInit {
   private initForm() {
     this.route.data.subscribe(data => {
       const quiz = data.quiz;
-      console.log(quiz);
       this.quizForm = new FormGroup({
         naam: new FormControl(quiz.naam),
         adres: new FormControl(quiz.adres),
-        datum: new FormControl(quiz.datum),
+        datum: new FormControl(quiz.datum.toDate()),
         uur: new FormControl(quiz.uur),
         aantalSpelers: new FormControl(quiz.aantalSpelers),
         arno: new FormControl(quiz.arno),
