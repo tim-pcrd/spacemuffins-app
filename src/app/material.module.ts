@@ -23,6 +23,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatSliderModule} from '@angular/material/slider';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 export const MY_FORMATS = {
@@ -61,7 +62,8 @@ registerLocaleData(localeBe);
     MatTableModule,
     MatDialogModule,
     MatStepperModule,
-    MatSliderModule
+    MatSliderModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     MatSidenavModule,
@@ -84,7 +86,8 @@ registerLocaleData(localeBe);
     MatTableModule,
     MatDialogModule,
     MatStepperModule,
-    MatSliderModule
+    MatSliderModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'nl-be'},

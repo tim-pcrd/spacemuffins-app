@@ -16,8 +16,8 @@ mat-card {
   text-align: center;
 }
 
-mat-form-field {
-  width: 70%;
+mat-form-field, .horizontalDiv {
+  width: 80%;
   font-size: 1rem!important;
 }
 
@@ -34,7 +34,7 @@ mat-card-title {
     width: 460px;
   }
 
-  mat-form-field {
+  mat-form-field, .horizontalDiv {
     width: 100%;
   }
 
@@ -66,4 +66,9 @@ mat-card-title {
   mat-card {
     width: 280px;
   }
+}
+
+.spinnerDiv{
+  margin-top:50px;
+  height:140px;
 }

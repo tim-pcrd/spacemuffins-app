@@ -58,6 +58,12 @@ table {
 
 }
 
+@media only screen and (max-width: 350px) {
+  .scoreSpan {
+    display:none;
+  }
+}
+
 
 
 tr.detail-row {
@@ -141,6 +147,10 @@ tr.element-row:not(.expanded-row):active {
   background-color: lightgreen!important;
 }
 
+.chip-yellow {
+  background-color: #f5f55efd!important;
+}
+
 .span-green {
   background-color:lightgreen;
   padding: 2px;
@@ -158,6 +168,13 @@ tr.element-row:not(.expanded-row):active {
 tr:not(.expanded-row):hover {
   background: rgb(231, 231, 231)!important;
 }
+
+.spinnerDiv{
+  margin-top:50px;
+  height:140px;
+}
+
+
 
 
 

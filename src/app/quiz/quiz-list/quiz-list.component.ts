@@ -11,6 +11,7 @@ import { PuntenDialogComponent } from '../dialogs/punten-dialog/punten-dialog.co
 import { MatPaginator } from '@angular/material/paginator';
 import { switchMap, take } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-quiz-list',
@@ -35,8 +36,9 @@ export class QuizListComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   private quizSub: Subscription;
   private seizoenSub: Subscription;
+  isLoading = false;
 
-  constructor(private quizService: QuizService, private dialog: MatDialog) { }
+  constructor(private quizService: QuizService, private dialog: MatDialog, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.dateNow = new Date(new Date().toDateString());
@@ -66,17 +68,16 @@ export class QuizListComponent implements OnInit, AfterViewInit, OnDestroy {
 
       if (this.selectedSeizoen.id !== this.seizoenen[0].id) {
         this.quizSub.unsubscribe();
-      } else if (this.quizSub.closed) {
-        this.quizSub = this.quizSubscription(this.selectedSeizoen);
-      }
-
-      this.quizService.getQuizzenBySeizoenFromDb(this.selectedSeizoen.begindatum, this.selectedSeizoen.einddatum)
+        this.quizService.getQuizzenBySeizoenFromDb(this.selectedSeizoen.begindatum, this.selectedSeizoen.einddatum)
         .pipe(
           take(1)
         )
         .subscribe(quizData => {
           this.quizzen.data = this.quizService.getQuizzen(quizData);
         });
+      } else if (this.quizSub.closed) {
+        this.quizSub = this.quizSubscription(this.selectedSeizoen);
+      }
     }
   }
 
@@ -130,6 +131,7 @@ export class QuizListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   seizoenSubscription() {
+    this.isLoading = true;
     return this.quizService.seizoenenChanged.subscribe(seizoenData => {
       this.seizoenen = seizoenData;
       this.selectedSeizoen = this.seizoenen[0];
@@ -144,7 +146,12 @@ export class QuizListComponent implements OnInit, AfterViewInit, OnDestroy {
     return this.quizService.getQuizzenBySeizoenFromDb(seizoen.begindatum, seizoen.einddatum)
     .subscribe(quizData => {
       this.quizzen.data = this.quizService.getQuizzen(quizData);
+      this.isLoading = false;
     });
+  }
+
+  onQuizEdit(id) {
+    this.router.navigate([id], {relativeTo: this.route});
   }
 
   ngOnDestroy() {

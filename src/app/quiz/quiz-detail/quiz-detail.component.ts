@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, ParamMap, Router } from '@angular/router';
 import { QuizService } from '../quiz.service';
-import { Quiz } from '../quiz.model';
 import { Subscription } from 'rxjs';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { switchMap } from 'rxjs/operators';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-quiz-detail',
@@ -22,34 +23,51 @@ export class QuizDetailComponent implements OnInit {
   private quizId;
   private sub: Subscription;
   quizForm: FormGroup;
+  // quiz: Quiz;
+  isLoading = true;
 
-  constructor(private route: ActivatedRoute, private quizService: QuizService) { }
+  constructor(private route: ActivatedRoute, private quizService: QuizService, private router: Router) { }
 
   ngOnInit() {
-    this.initForm();
+    this.isLoading = true;
+    this.sub = this.route.paramMap
+      .pipe(
+        switchMap((params: ParamMap) => {
+          this.quizId = params.get('id');
+          return this.quizService.getQuiz(this.quizId);
+        })
+      )
+      .subscribe(data => {
+        if (data) {
+          this.initForm(data);
+          this.invallers = data.invallers;
+          this.isLoading = false;
+        } else {
+          this.router.navigate(['/quizzen']);
+        }
+      });
+
   }
 
-  private initForm() {
-    this.route.data.subscribe(data => {
-      const quiz = data.quiz;
-      this.quizForm = new FormGroup({
-        naam: new FormControl(quiz.naam),
-        adres: new FormControl(quiz.adres),
-        datum: new FormControl(quiz.datum.toDate()),
-        uur: new FormControl(quiz.uur),
-        aantalSpelers: new FormControl(quiz.aantalSpelers),
-        arno: new FormControl(quiz.arno),
-        bart: new FormControl(quiz.bart),
-        tim: new FormControl(quiz.tim),
-        ward: new FormControl(quiz.ward),
-        opmerkingen: new FormControl(quiz.opmerkingen),
-        link: new FormControl(quiz.link),
-        behaaldePunten: new FormControl(quiz.behaaldePunten),
-        maxPunten: new FormControl(quiz.maxPunten),
-        positie: new FormControl(quiz.positie),
-        aantalPloegen: new FormControl(quiz.aantalPloegen),
-        score: new FormControl(quiz.score)
-      });
+  private initForm(quizData) {
+    console.log(quizData.naam);
+    this.quizForm = new FormGroup({
+      naam: new FormControl(quizData.naam, Validators.required),
+      adres: new FormControl(quizData.adres, Validators.required),
+      datum: new FormControl(quizData.datum.toDate(), Validators.required),
+      uur: new FormControl(quizData.uur, Validators.required),
+      aantalSpelers: new FormControl(quizData.aantalSpelers, Validators.required),
+      arno: new FormControl(quizData.arno),
+      bart: new FormControl(quizData.bart),
+      tim: new FormControl(quizData.tim),
+      ward: new FormControl(quizData.ward),
+      opmerkingen: new FormControl(quizData.opmerkingen),
+      link: new FormControl(quizData.link),
+      behaaldePunten: new FormControl(quizData.behaaldePunten),
+      maxPunten: new FormControl(quizData.maxPunten),
+      positie: new FormControl(quizData.positie),
+      aantalPloegen: new FormControl(quizData.aantalPloegen),
+      score: new FormControl(quizData.score)
     });
   }
 
@@ -74,8 +92,18 @@ export class QuizDetailComponent implements OnInit {
     }
   }
 
+  onSubmit() {
+    this.quizForm.value.invallers = this.invallers;
+    this.quizForm.value.datum = moment(this.quizForm.value.datum).toDate();
+    console.log(this.quizForm);
+    if (this.quizForm.valid) {
+      this.quizService.updateQuiz(this.quizId, this.quizForm.value);
+    }
+  }
+
   onReset(form) {
 
   }
+
 
 }

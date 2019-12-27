@@ -90,7 +90,8 @@ export class QuizService {
     this.db.collection('quizzen').doc(id)
       .update(data)
       .then(() => this.snackBar.open('Succesvol opgeslagen', null, {duration: 3000}))
-      .catch(() =>  this.snackBar.openFromComponent(ErrorComponent, {duration: 3000}));
+      .catch(() =>  this.snackBar.openFromComponent(ErrorComponent, {duration: 3000}))
+      .finally(() => this.router.navigate(['/quizzen']));
   }
 
   getAantalSpelers(quiz) {

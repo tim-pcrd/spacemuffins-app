@@ -10,7 +10,7 @@ const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'quizzen', component: QuizComponent},
-  {path: 'quizzen/:id', component: QuizDetailComponent, resolve: {quiz: QuizResolverService}}
+  {path: 'quizzen/:id', component: QuizDetailComponent}
 ];
 
 @NgModule({

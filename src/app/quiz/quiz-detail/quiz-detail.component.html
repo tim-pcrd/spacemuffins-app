@@ -1,5 +1,8 @@
 <section class="main">
-  <form fxLayout fxLayoutAlign="center" [formGroup]="quizForm">
+  <div class="spinnerDiv" fxLayout fxLayoutAlign="center" *ngIf="isLoading">
+      <mat-spinner></mat-spinner>
+  </div>
+  <form fxLayout fxLayoutAlign="center" [formGroup]="quizForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
     <mat-card>
       <mat-card-header fxLayout="column" fxLayoutAlign="center center">
           <mat-card-title>Gegevens</mat-card-title>
@@ -86,7 +89,7 @@
           </mat-checkbox>
         </div>
 
-        <!-- <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline">
           <mat-label>Invallers</mat-label>
           <mat-chip-list #chipList aria-label="Invallers">
             <mat-chip *ngFor="let invaller of invallers" [selectable]="selectable"
@@ -100,16 +103,56 @@
                     [matChipInputAddOnBlur]="addOnBlur"
                     (matChipInputTokenEnd)="addInvaller($event)">
           </mat-chip-list>
-        </mat-form-field> -->
-<!--
+        </mat-form-field>
+
         <mat-form-field appearance="outline">
           <mat-label>Opmerkingen</mat-label>
           <textarea matInput rows="3" name="opmerkingen"></textarea>
-        </mat-form-field> -->
+        </mat-form-field>
+
+        <div class="horizontalDiv" fxLayout.gt-xs="row" fxLayoutGap.gt-xs="20px">
+          <mat-form-field appearance="outline">
+            <mat-label>Behaalde punten</mat-label>
+            <input type="number" matInput formControlName="behaaldePunten" [required]="quizForm.value.maxPunten">
+            <mat-error>Verplicht veld</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Maximaal te behalen</mat-label>
+            <input type="number" matInput formControlName="maxPunten" [required]="quizForm.value.behaaldePunten">
+            <mat-error>Verplicht veld</mat-error>
+          </mat-form-field>
+
+        </div>
+
+        <div class="horizontalDiv" fxLayout.gt-xs="row" fxLayoutGap.gt-xs="20px">
+          <mat-form-field appearance="outline">
+            <mat-label>Positie</mat-label>
+            <input type="number" matInput formControlName="positie" [required]="quizForm.value.aantalPloegen">
+            <mat-error>Verplicht veld</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Aantal ploegen</mat-label>
+            <input type="number" matInput formControlName="aantalPloegen" [required]="quizForm.value.positie">
+            <mat-error>Verplicht veld</mat-error>
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline">
+          <mat-label>LosFlippos link</mat-label>
+          <textarea type="text" matInput formControlName="link" rows="3"></textarea>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline">
+          <mat-label>Score (op 10)</mat-label>
+          <input type="number" matInput formControlName="score">
+        </mat-form-field>
 
         <div fxLayout fxLayout="center" fxLayoutGap="10px">
           <button mat-raised-button color="warn" type="button">ANNULEER</button>
-          <button mat-raised-button color="primary" type="submit">OPSLAAN</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!quizForm.valid">OPSLAAN</button>
         </div>
       </mat-card-content>
     </mat-card>

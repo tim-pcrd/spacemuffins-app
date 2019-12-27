@@ -10,14 +10,15 @@ import { UIService } from 'src/app/shared/ui.service';
 export class SidenavComponent implements OnInit {
   @Output() sideNavClose = new EventEmitter<void>();
   isAuth = false;
-  show = false;
+  isLoading = false;
 
   constructor(private authService: AuthService, private uiService: UIService) { }
 
   ngOnInit() {
+    this.isLoading = true;
     this.authService.authChange.subscribe(authState => {
       this.isAuth = authState;
-      this.show = true;
+      this.isLoading = false;
     });
   }
 

@@ -9,16 +9,16 @@ import { AuthService } from 'src/app/auth/auth.service';
 export class HeaderComponent implements OnInit {
   @Output() sideNavToggle = new EventEmitter<void>();
   isAuth = false;
-  show = false;
+  isLoading = false;
 
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    this.isLoading = true;
     this.authService.authChange
       .subscribe(isAuth => {
         this.isAuth = isAuth;
-        this.show = true;
-        console.log(this.isAuth);
+        this.isLoading = false;
       });
   }
 
