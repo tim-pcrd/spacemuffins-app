@@ -3,7 +3,7 @@
     <mat-tab label="QUIZOVERZICHT">
       <app-quiz-list></app-quiz-list>
     </mat-tab>
-    <mat-tab label="NIEUWE QUIZ">
+    <mat-tab label="NIEUWE QUIZ" *ngIf="isAuth">
       <app-quiz-new></app-quiz-new>
     </mat-tab>
   </mat-tab-group>

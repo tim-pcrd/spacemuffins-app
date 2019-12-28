@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { UIService } from '../shared/ui.service';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-quiz',
@@ -10,13 +11,18 @@ import { UIService } from '../shared/ui.service';
 })
 export class QuizComponent implements OnInit, OnDestroy {
   tabIndex = 0;
-  private sub: Subscription;
+  private tabSub: Subscription;
+  private authSub: Subscription;
+  isAuth = false;
 
-  constructor(private uiService: UIService) { }
+  constructor(private uiService: UIService, private authService: AuthService) { }
 
   ngOnInit() {
-    this.sub = this.uiService.changeTabIndex
+    this.tabSub = this.uiService.changeTabIndex
       .subscribe(n => this.tabIndex = n);
+
+    this.authSub = this.authService.authChange
+      .subscribe(isAuth => this.isAuth = isAuth);
   }
 
   changeTab() {
@@ -24,7 +30,12 @@ export class QuizComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    if (this.tabSub) {
+      this.tabSub.unsubscribe();
+    }
+    if (this.authSub) {
+      this.authSub.unsubscribe();
+    }
   }
 
 

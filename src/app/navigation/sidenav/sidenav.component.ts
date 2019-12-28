@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
 import { UIService } from 'src/app/shared/ui.service';
+import { skip } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidenav',
@@ -12,14 +14,18 @@ export class SidenavComponent implements OnInit {
   isAuth = false;
   isLoading = false;
 
-  constructor(private authService: AuthService, private uiService: UIService) { }
+  constructor(private authService: AuthService, private uiService: UIService, private router: Router) { }
 
   ngOnInit() {
     this.isLoading = true;
-    this.authService.authChange.subscribe(authState => {
-      this.isAuth = authState;
-      this.isLoading = false;
-    });
+    this.authService.authChange
+      .pipe(
+        skip(1)
+      )
+      .subscribe(authState => {
+        this.isAuth = authState;
+        this.isLoading = false;
+      });
   }
 
   onCloseSideNav() {

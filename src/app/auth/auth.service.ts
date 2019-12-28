@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth} from '@angular/fire/auth';
 import { AuthData } from './auth-data.model';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
-  authChange = new Subject<boolean>();
+  authChange = new BehaviorSubject(false);
+  isLoading = new Subject<boolean>();
 
-  constructor(private firebaseAuth: AngularFireAuth, private router: Router) {}
+  constructor(private firebaseAuth: AngularFireAuth, private router: Router, private snackBar: MatSnackBar) {}
 
   authListener() {
     // this.firebaseAuth.auth.onAuthStateChanged(user => {
@@ -25,28 +27,30 @@ export class AuthService {
         this.authChange.next(true);
       } else {
         this.authChange.next(false);
-        this.router.navigate(['/']);
       }
     });
   }
 
   login(authData: AuthData) {
+    this.isLoading.next(true);
     this.firebaseAuth.auth.signInWithEmailAndPassword(authData.email, authData.password)
       .then(result => {
-        console.log('user is logged in');
+        this.isLoading.next(false);
+        this.router.navigate(['/']);
       })
       .catch(error => {
-        console.log(this.handleErrorMessages(error));
+        this.isLoading.next(false);
+        this.snackBar.open(this.handleErrorMessages(error), null, {duration: 4000});
       });
   }
 
   logout() {
     this.firebaseAuth.auth.signOut()
       .then(() => {
-        console.log('user logged out');
+        this.router.navigate(['/']);
       })
       .catch(error => {
-        console.log(this.handleErrorMessages(error));
+        this.snackBar.open(this.handleErrorMessages(error), null, {duration: 4000});
       });
   }
 
@@ -59,6 +63,9 @@ export class AuthService {
         break;
       case 'auth/user-disabled':
         errorMessage = 'Dit account is uitgeschakeld';
+        break;
+      case 'auth/too-many-requests':
+        errorMessage = 'Te veel foutieve aanmeldpogingen. Probeer het later nog eens.';
         break;
       default:
         errorMessage = 'Er is een onbekende fout opgetreden';

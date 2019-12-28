@@ -15,10 +15,10 @@
           <a [routerLink]="['quizzen']" routerLinkActive="active">Quizoverzicht</a>
       </li>
       <li *ngIf="!isAuth && !isLoading">
-          <a [routerLink]="['/login']" routerLinkActive="active">Login</a>
+          <a [routerLink]="['/login']" routerLinkActive="active">Inloggen</a>
       </li>
       <li *ngIf="isAuth && !isLoading">
-        <a (click)="onLogout()" style="cursor: pointer;">Logout</a>
+        <a (click)="onLogout()" style="cursor: pointer;">Uitloggen</a>
       </li>
       <li *ngIf="isLoading">
         <mat-spinner diameter="25"></mat-spinner>

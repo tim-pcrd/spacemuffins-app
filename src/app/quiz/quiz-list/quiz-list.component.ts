@@ -12,6 +12,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { switchMap, take } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-quiz-list',
@@ -36,11 +37,22 @@ export class QuizListComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   private quizSub: Subscription;
   private seizoenSub: Subscription;
+  private authSub: Subscription;
   isLoading = false;
+  isAuth = false;
 
-  constructor(private quizService: QuizService, private dialog: MatDialog, private router: Router, private route: ActivatedRoute) { }
+  constructor(
+    private quizService: QuizService,
+    private dialog: MatDialog,
+    private router: Router,
+    private route: ActivatedRoute,
+    private authService: AuthService) { }
 
   ngOnInit() {
+    this.authSub = this.authService.authChange
+      .subscribe(isAuth => this.isAuth = isAuth);
+
+
     this.dateNow = new Date(new Date().toDateString());
     this.seizoenSub = this.seizoenSubscription();
 
@@ -155,8 +167,15 @@ export class QuizListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.quizSub.unsubscribe();
-    this.seizoenSub.unsubscribe();
+    if (this.quizSub) {
+      this.quizSub.unsubscribe();
+    }
+    if (this.seizoenSub) {
+      this.seizoenSub.unsubscribe();
+    }
+    if (this.authSub) {
+      this.authSub.unsubscribe();
+    }
   }
 
 
