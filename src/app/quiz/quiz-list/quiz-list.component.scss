@@ -110,7 +110,7 @@ tr.element-row:not(.expanded-row):active {
   padding-top: 5px;
 }
 
-.quizButtons {
+.quizButtons, .quizDetails {
   border-top: 2px solid $primary-color;
 
   button {
@@ -172,6 +172,10 @@ tr:not(.expanded-row):hover {
 .spinnerDiv{
   margin-top:50px;
   height:140px;
+}
+
+.paginatorVisibility {
+  visibility: hidden;
 }
 
 

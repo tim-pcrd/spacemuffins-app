@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ActivatedRoute, Params, ParamMap, Router } from '@angular/router';
@@ -7,13 +7,14 @@ import { Subscription } from 'rxjs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { switchMap } from 'rxjs/operators';
 import * as moment from 'moment';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-quiz-detail',
   templateUrl: './quiz-detail.component.html',
   styleUrls: ['./quiz-detail.component.scss']
 })
-export class QuizDetailComponent implements OnInit {
+export class QuizDetailComponent implements OnInit, OnDestroy {
   visible = true;
   selectable = true;
   removable = true;
@@ -21,16 +22,20 @@ export class QuizDetailComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   invallers: string[] = [];
   private quizId;
-  private sub: Subscription;
+  private quizSub: Subscription;
+  private authSub: Subscription
   quizForm: FormGroup;
-  // quiz: Quiz;
   isLoading = true;
 
-  constructor(private route: ActivatedRoute, private quizService: QuizService, private router: Router) { }
+  constructor(
+    private route: ActivatedRoute,
+    private quizService: QuizService,
+    private router: Router,
+    private authService: AuthService) { }
 
   ngOnInit() {
     this.isLoading = true;
-    this.sub = this.route.paramMap
+    this.quizSub = this.route.paramMap
       .pipe(
         switchMap((params: ParamMap) => {
           this.quizId = params.get('id');
@@ -46,6 +51,14 @@ export class QuizDetailComponent implements OnInit {
           this.router.navigate(['/quizzen']);
         }
       });
+
+
+    this.authSub = this.authService.authChange
+      .subscribe(isAuth => {
+        if (!isAuth) {
+          this.router.navigate(['/quizzen']);
+        }
+      })
 
   }
 
@@ -95,14 +108,22 @@ export class QuizDetailComponent implements OnInit {
   onSubmit() {
     this.quizForm.value.invallers = this.invallers;
     this.quizForm.value.datum = moment(this.quizForm.value.datum).toDate();
-    console.log(this.quizForm);
     if (this.quizForm.valid) {
       this.quizService.updateQuiz(this.quizId, this.quizForm.value);
     }
   }
 
-  onReset(form) {
+  onAnnuleer(form) {
+    this.router.navigate(['/quizzen']);
+  }
 
+  ngOnDestroy() {
+    if (this.quizSub) {
+      this.quizSub.unsubscribe();
+    }
+    if (this.authSub) {
+      this.authSub.unsubscribe();
+    }
   }
 
 

@@ -151,7 +151,7 @@
         </mat-form-field>
 
         <div fxLayout fxLayout="center" fxLayoutGap="10px">
-          <button mat-raised-button color="warn" type="button">ANNULEER</button>
+          <button mat-raised-button color="warn" type="button" (click)="onAnnuleer()">ANNULEER</button>
           <button mat-raised-button color="primary" type="submit" [disabled]="!quizForm.valid">OPSLAAN</button>
         </div>
       </mat-card-content>

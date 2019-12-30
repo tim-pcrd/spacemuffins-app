@@ -65,6 +65,7 @@ export class QuizListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onChange() {
     if (this.selectedSeizoenValue === 'all') {
+      this.quizSub.unsubscribe();
       this.quizService.getQuizzenFromDb()
         .pipe(
           take(1)

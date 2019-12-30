@@ -31,7 +31,7 @@
       class="mat-elevation-z8">
       <ng-container matColumnDef="datum">
         <th mat-header-cell *matHeaderCellDef>Datum </th>
-        <td mat-cell *matCellDef="let element"> {{element.datum.toDate() | date:'dd/MM/yyyy  (E)'}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.datum.toDate() | date:'dd/MM/yyyy  E'}} </td>
       </ng-container>
 
       <ng-container matColumnDef="naam">
@@ -47,10 +47,11 @@
       <ng-container  matColumnDef="aantalSpelers">
         <th fxHide.xs mat-header-cell *matHeaderCellDef># spelers </th>
         <td fxHide.xs mat-cell *matCellDef="let element">
-          <mat-chip [ngClass]="{'chip-green': element.aantalSpelersAanwezig === element.aantalSpelers, 'chip-red': element.aantalSpelersAanwezig > element.aantalSpelers}" >
+          <mat-chip-list>
+            <mat-chip [ngClass]="{'chip-green': element.aantalSpelersAanwezig === element.aantalSpelers, 'chip-red': element.aantalSpelersAanwezig > element.aantalSpelers}" >
               {{element.aantalSpelersAanwezig}}/{{element.aantalSpelers}}
-          </mat-chip>
-
+            </mat-chip>
+          </mat-chip-list>
         </td>
       </ng-container>
 
@@ -130,10 +131,12 @@
                   <div fxLayout fxLayoutAlign="space-between">
                       <div fxLayout fxLayoutAlign="center center" *ngIf="element.score">
                         <span class="scoreSpan">Score:</span>&nbsp;
-                        <mat-chip
-                          [ngClass]="{'chip-green': element.score >= 6, 'chip-red': element.score < 4.5, 'chip-yellow': element.score >= 4.5 && element.score < 6}" >
-                          {{element.score}}
-                      </mat-chip>
+                        <mat-chip-list>
+                          <mat-chip
+                            [ngClass]="{'chip-green': element.score >= 6, 'chip-red': element.score < 4.5, 'chip-yellow': element.score >= 4.5 && element.score < 6}" >
+                            {{element.score}}
+                          </mat-chip>
+                        </mat-chip-list>
                       </div>
                       <button mat-icon-button color="warn" title="Verwijder" (click)="onDeleteQuiz(element.id)"><mat-icon>clear</mat-icon></button>
                   </div>
@@ -152,7 +155,7 @@
       </tr>
       <tr mat-row *matRowDef="let row; columns: ['expandedDetail']"  class="detail-row"></tr>
     </table>
-    <mat-paginator showFirstLastButtons
+    <mat-paginator [ngClass]="{'paginatorVisibility': isLoading}" showFirstLastButtons
               [pageSize]="10"
               [pageSizeOptions]="[10, 20, 50]"
               >

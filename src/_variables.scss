@@ -4,6 +4,7 @@
 $primary-color-lightest: #f7faf7;
 $primary-color-light: mat-color($app-primary, 300);
 $primary-color: mat-color($app-primary);
+$primary-color-dark: mat-color($app-primary, 700);
 $primary-color-transparant: rgba(230, 234, 234,0.9);
 $primary-color-50: mat-color($app-primary, 50);
 
