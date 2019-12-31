@@ -23,7 +23,7 @@ export class QuizDetailComponent implements OnInit, OnDestroy {
   invallers: string[] = [];
   private quizId;
   private quizSub: Subscription;
-  private authSub: Subscription
+  private authSub: Subscription;
   quizForm: FormGroup;
   isLoading = true;
 
@@ -58,7 +58,7 @@ export class QuizDetailComponent implements OnInit, OnDestroy {
         if (!isAuth) {
           this.router.navigate(['/quizzen']);
         }
-      })
+      });
 
   }
 

@@ -7,12 +7,14 @@ import { QuizDetailComponent } from './quiz/quiz-detail/quiz-detail.component';
 import { QuizResolverService } from './quiz/quiz-resolver.service';
 import { AuthGuard } from './auth/auth-guard.service';
 import { LoginGuard } from './auth/login/login-guard.service';
+import { QuizFotosComponent } from './quiz/quiz-fotos/quiz-fotos.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent, canActivate: [LoginGuard]},
   {path: 'quizzen', component: QuizComponent},
   {path: 'quizzen/:id', component: QuizDetailComponent, canActivate: [AuthGuard]},
+  {path: 'fotos/:id', component: QuizFotosComponent},
   {path: '**', redirectTo: ''}
 ];
 

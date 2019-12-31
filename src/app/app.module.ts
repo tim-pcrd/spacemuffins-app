@@ -4,6 +4,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { ImageViewerModule } from 'ng2-image-viewer';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -25,6 +26,8 @@ import { ErrorComponent } from './shared/error/error.component';
 import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confirmation-dialog.component';
 import { SpelersDialogComponent } from './quiz/dialogs/spelers-dialog/spelers-dialog.component';
 import { PuntenDialogComponent } from './quiz/dialogs/punten-dialog/punten-dialog.component';
+import { QuizFotosComponent } from './quiz/quiz-fotos/quiz-fotos.component';
+import { FotoViewerComponent } from './quiz/quiz-fotos/foto-viewer/foto-viewer.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,9 @@ import { PuntenDialogComponent } from './quiz/dialogs/punten-dialog/punten-dialo
     ErrorComponent,
     ConfirmationDialogComponent,
     SpelersDialogComponent,
-    PuntenDialogComponent
+    PuntenDialogComponent,
+    QuizFotosComponent,
+    FotoViewerComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +59,8 @@ import { PuntenDialogComponent } from './quiz/dialogs/punten-dialog/punten-dialo
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    ImageViewerModule
   ],
   providers: [],
   entryComponents: [

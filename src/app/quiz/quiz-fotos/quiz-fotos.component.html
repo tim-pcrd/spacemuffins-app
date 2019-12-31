@@ -1,0 +1,15 @@
+<section class="main" fxLayout="column" fxLayoutAlign="center center">
+<p>Hello {{quizId}}</p>
+<button (click)="testMethod()" fxFlexAlign="center">help</button>
+
+<div *ngIf="!isLoading">
+  <a *ngFor="let item of urlList" (click)="onImagePick(item)">
+    <img [src]="item">
+  </a>
+</div>
+
+
+<app-foto-viewer *ngIf="!isLoading && clickedFoto" [foto]="clickedFoto"></app-foto-viewer>
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+
+</section>

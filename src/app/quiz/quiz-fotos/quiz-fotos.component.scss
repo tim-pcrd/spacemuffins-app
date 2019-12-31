@@ -1,0 +1,44 @@
+section {
+  padding-top: 110px;
+}
+
+a {
+  cursor: pointer;
+  margin-left:10px;
+  margin-right: 10px;
+}
+
+img {
+  width: 160px;
+}
+
+app-foto-viewer {
+  width: 80%;
+}
+
+@media only screen and (min-width: 1400px) {
+  app-foto-viewer {
+    width: 1300px;
+  }
+}
+
+
+
+@media only screen and (max-width: 599px) {
+  section {
+    padding-top: 70px;
+  }
+
+  a {
+    margin-left:4px;
+    margin-right: 4px;
+  }
+
+  img {
+    width: 95px;
+  }
+
+  app-foto-viewer {
+    width: 95%;
+  }
+}

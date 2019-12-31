@@ -167,6 +167,10 @@ export class QuizListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.router.navigate([id], {relativeTo: this.route});
   }
 
+  onFotoEdit(id) {
+    this.router.navigate(['/fotos/' + id]);
+  }
+
   ngOnDestroy() {
     if (this.quizSub) {
       this.quizSub.unsubscribe();
