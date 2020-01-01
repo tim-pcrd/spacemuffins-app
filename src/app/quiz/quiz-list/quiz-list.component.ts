@@ -13,6 +13,7 @@ import { switchMap, take } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-quiz-list',
@@ -35,6 +36,7 @@ export class QuizListComponent implements OnInit, AfterViewInit, OnDestroy {
   expandedElement: Quiz | null;
   dateNow;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
   private quizSub: Subscription;
   private seizoenSub: Subscription;
   private authSub: Subscription;
@@ -61,6 +63,7 @@ export class QuizListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     this.quizzen.paginator = this.paginator;
+    this.quizzen.sort = this.sort;
   }
 
   onChange() {
@@ -181,6 +184,24 @@ export class QuizListComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.authSub) {
       this.authSub.unsubscribe();
     }
+  }
+
+  doFilter(value: string) {
+    this.quizzen.filter = value.trim().toLowerCase();
+  }
+  addToCalendar(datum: Date, naam: string, adres, uur) {
+    uur = uur.replace(/\./g, '');
+    naam = naam.replace(/ /g, '%20');
+    adres = adres.replace(/ /g, '%20');
+    const mm = datum.getMonth() < 9 ? '0' + (datum.getMonth() + 1) : datum.getMonth() + 1;
+    const dd = datum.getDate() < 10 ? '0' + (datum.getDate()) : datum.getDate();
+    const yyyy = datum.getFullYear();
+
+
+    const beginDatum = yyyy.toString() + mm.toString() + dd.toString() + 'T' + uur + '00';
+    const eindDatum = yyyy.toString() + mm.toString() + dd.toString() + 'T235900';
+    window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${naam}&dates=${beginDatum}%2F${eindDatum}` +
+                `&location=${adres}`, '_blank');
   }
 
 

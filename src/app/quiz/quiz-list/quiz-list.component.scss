@@ -39,6 +39,10 @@ table {
     padding-top: 20px;
   }
 
+  .scoreSpan {
+    display:none;
+  }
+
   mat-card, table, mat-paginator {
     width: 95%;
   }
@@ -58,9 +62,18 @@ table {
 
 }
 
-@media only screen and (max-width: 350px) {
-  .scoreSpan {
-    display:none;
+@media only screen and (max-width: 355px) {
+
+
+  .quizButtons {
+    button {
+      height: 42px!important;
+      width: 42px!important;
+    }
+
+    mat-icon {
+      font-size: 22px!important;
+    }
   }
 }
 
@@ -116,7 +129,7 @@ tr.element-row:not(.expanded-row):active {
   button {
     height: 50px;
     width: 50px;
-    margin-right: 5px;
+    margin-right:3px;
   }
 
   mat-icon {
@@ -175,6 +188,14 @@ tr:not(.expanded-row):hover {
 }
 
 .paginatorVisibility {
+  visibility: hidden;
+}
+
+.visible {
+  visibility: visible;
+}
+
+.hidden {
   visibility: hidden;
 }
 

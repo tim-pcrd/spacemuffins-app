@@ -32,7 +32,20 @@ export class FotoService {
   uploadFile(id, foto) {
     const filePath = id + '/' + foto.name;
     const task = this.storage.upload(filePath, foto);
-    this.getList(id);
+    task.then(() => {
+      this.getList(id);
+    }).catch(error => console.log(error));
+  }
+
+  deleteFile(url, id) {
+    this.storage.storage.refFromURL(url).delete()
+    .then(() => {
+      this.getList(id);
+    })
+    .catch((error) => {
+      console.log(error);
+      this.getList(id);
+    });
   }
 
   getFile(url) {

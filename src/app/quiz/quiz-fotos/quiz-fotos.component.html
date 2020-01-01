@@ -1,8 +1,24 @@
-<section class="main" fxLayout="column" fxLayoutAlign="center center">
-<p>Hello {{quizId}}</p>
-<button (click)="testMethod()" fxFlexAlign="center">help</button>
+<section class="main" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" *ngIf="!isLoading">
+<div class="titleDiv">
+  <h2>{{quizInfo?.naam}}</h2>
+  <span>{{quizInfo?.datum.toDate() | date}}</span>
+</div>
 
-<div *ngIf="!isLoading">
+<button type="button" mat-raised-button color="primary" (click)="fileInput.click()" *ngIf="!imgUrl && urlList.length < 3">
+  Kies foto
+  <mat-icon>photo_camera</mat-icon>
+</button>
+<button (click)="addJson()">add json</button>
+<input hidden type="file" accept="image/*" capture="environment" #fileInput (change)="onFileSelected(fileInput.files)">
+<img class="previewImage" [src]="imgUrl" *ngIf="imgUrl">
+<div class="buttonsDiv" fxLayout fxLayoutAlign="center" fxLayoutGap="10px" *ngIf="imgUrl">
+  <button type="button" mat-raised-button color="warn" (click)="fileInput.value = ''; onDeletePreview();"><mat-icon>clear</mat-icon></button>
+  <button type="button" mat-raised-button color="primary" (click)="saveFoto()"><mat-icon>save</mat-icon></button>
+</div>
+
+
+<div *ngIf="!isLoading && urlList.length > 0" class="imageList">
+  <h3>Overzicht</h3>
   <a *ngFor="let item of urlList" (click)="onImagePick(item)">
     <img [src]="item">
   </a>
@@ -10,6 +26,14 @@
 
 
 <app-foto-viewer *ngIf="!isLoading && clickedFoto" [foto]="clickedFoto"></app-foto-viewer>
-<mat-spinner *ngIf="isLoading"></mat-spinner>
+
+<button mat-raised-button color="warn" (click)="deleteFoto()" *ngIf="clickedFoto">Verwijder foto <mat-icon>delete</mat-icon></button>
+
 
 </section>
+
+<div class="spinnerDiv" fxlayout fxLayoutAlign="center">
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+</div>
+
+

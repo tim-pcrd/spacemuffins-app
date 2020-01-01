@@ -17,7 +17,7 @@
           </mat-select>
         </mat-form-field>
         <mat-form-field>
-          <input matInput type="text" placeholder="Filter">
+          <input matInput type="text" placeholder="Filter" (keyup)="doFilter($event.target.value)">
           <mat-icon matSuffix color="primary">search</mat-icon>
         </mat-form-field>
       </mat-card-content>
@@ -72,7 +72,7 @@
                 [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
                 <div class="quizDetails" fxLayout fxLayoutGap.xs="15px" fxLayoutGap.gt-xs="40px">
                     <div fxFlex.lt-md="200px" fxFlex.xs="100px" fxFlex.gt-sm="350px">
-                      <div class="quiz-detail">
+                      <div class="quiz-detail" style="word-wrap: break-word;">
                           <span class="span-title">Adres: </span><br>
                           <a [href]="'https://www.google.com/maps/search/?api=1&query='+element.adres" target="_blank">{{element.adres}}</a>
 
@@ -123,14 +123,20 @@
                 </div>
                 <div *ngIf="!isAuth" style="height:10px"></div>
                 <div class="quizButtons" fxLayout fxLayoutAlign="space-between" *ngIf="isAuth">
-                  <div fxLayout fxLayoutAlign="space-between" >
+                  <div fxLayout fxLayoutAlign="start" >
                       <button mat-icon-button color="primary" title="Bewerk" (click)="onQuizEdit(element.id)"><mat-icon>edit</mat-icon></button>
                       <button mat-icon-button color="primary" title="Spelers" (click)="onSpelersEdit(element.id)"><mat-icon>person_add</mat-icon></button>
+                      <button mat-icon-button color="primary" title="Kalender"
+                        (click)="addToCalendar(element.datum.toDate(), element.naam, element.adres, element.uur)"
+                        *ngIf="element.datum.toDate() >= dateNow">
+                        <mat-icon>calendar_today</mat-icon>
+                      </button>
                       <button mat-icon-button color="primary" title="Foto's" (click)="onFotoEdit(element.id)"><mat-icon>photo_camera</mat-icon></button>
+
                   </div>
-                  <div fxLayout fxLayoutAlign="space-between">
+                  <div fxLayout fxLayoutAlign="end">
                       <div fxLayout fxLayoutAlign="center center" *ngIf="element.score">
-                        <span class="scoreSpan">Score:</span>&nbsp;
+                        <span class="scoreSpan">Score: &nbsp;</span>
                         <mat-chip-list>
                           <mat-chip
                             [ngClass]="{'chip-green': element.score >= 6, 'chip-red': element.score < 4.5, 'chip-yellow': element.score >= 4.5 && element.score < 6}" >

@@ -19,7 +19,6 @@ import { QuizComponent } from './quiz/quiz.component';
 import { QuizListComponent } from './quiz/quiz-list/quiz-list.component';
 import { QuizNewComponent } from './quiz/quiz-new/quiz-new.component';
 import { QuizDetailComponent } from './quiz/quiz-detail/quiz-detail.component';
-import { environment } from 'src/environments/environment';
 import { LoginComponent } from './auth/login/login.component';
 import { SuccessComponent } from './shared/success/success.component';
 import { ErrorComponent } from './shared/error/error.component';
@@ -28,6 +27,8 @@ import { SpelersDialogComponent } from './quiz/dialogs/spelers-dialog/spelers-di
 import { PuntenDialogComponent } from './quiz/dialogs/punten-dialog/punten-dialog.component';
 import { QuizFotosComponent } from './quiz/quiz-fotos/quiz-fotos.component';
 import { FotoViewerComponent } from './quiz/quiz-fotos/foto-viewer/foto-viewer.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { FotoViewerComponent } from './quiz/quiz-fotos/foto-viewer/foto-viewer.c
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
-    ImageViewerModule
+    ImageViewerModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
   entryComponents: [

@@ -108,7 +108,8 @@ export class QuizService {
     if (quiz.ward) {
       aantal += 1;
     }
-    if (quiz.invallers.length > 0) {
+
+    if (quiz.invallers) {
       aantal += quiz.invallers.length;
     }
 
