@@ -29,6 +29,7 @@ import { QuizFotosComponent } from './quiz/quiz-fotos/quiz-fotos.component';
 import { FotoViewerComponent } from './quiz/quiz-fotos/foto-viewer/foto-viewer.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { StatistiekenComponent } from './statistieken/statistieken.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { environment } from '../environments/environment';
     SpelersDialogComponent,
     PuntenDialogComponent,
     QuizFotosComponent,
-    FotoViewerComponent
+    FotoViewerComponent,
+    StatistiekenComponent
   ],
   imports: [
     BrowserModule,

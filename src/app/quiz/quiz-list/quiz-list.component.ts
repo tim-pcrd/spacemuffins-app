@@ -191,8 +191,8 @@ export class QuizListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   addToCalendar(datum: Date, naam: string, adres, uur) {
     uur = uur.replace(/\./g, '');
-    naam = naam.replace(/ /g, '%20');
-    adres = adres.replace(/ /g, '%20');
+    naam = naam.replace(/ /g, '%20').replace(/&/, '%26');
+    adres = adres.replace(/ /g, '%20').replace(/&/, '%26');
     const mm = datum.getMonth() < 9 ? '0' + (datum.getMonth() + 1) : datum.getMonth() + 1;
     const dd = datum.getDate() < 10 ? '0' + (datum.getDate()) : datum.getDate();
     const yyyy = datum.getFullYear();

@@ -8,6 +8,7 @@ import { QuizResolverService } from './quiz/quiz-resolver.service';
 import { AuthGuard } from './auth/auth-guard.service';
 import { LoginGuard } from './auth/login/login-guard.service';
 import { QuizFotosComponent } from './quiz/quiz-fotos/quiz-fotos.component';
+import { StatistiekenComponent } from './statistieken/statistieken.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: 'quizzen', component: QuizComponent},
   {path: 'quizzen/:id', component: QuizDetailComponent, canActivate: [AuthGuard]},
   {path: 'fotos/:id', component: QuizFotosComponent},
+  {path: 'statistieken', component: StatistiekenComponent},
   {path: '**', redirectTo: ''}
 ];
 

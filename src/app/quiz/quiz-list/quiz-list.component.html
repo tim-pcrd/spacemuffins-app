@@ -77,7 +77,7 @@
                           <a [href]="'https://www.google.com/maps/search/?api=1&query='+element.adres" target="_blank">{{element.adres}}</a>
 
                       </div>
-                      <div class="quiz-detail" *ngIf="element.opmerkingen">
+                      <div class="quiz-detail" *ngIf="element.opmerkingen" style="word-wrap:break-word;">
                         <span class="span-title">Opmerking: </span><br>
                         {{element.opmerkingen}}
                       </div>

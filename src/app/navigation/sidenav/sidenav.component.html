@@ -23,6 +23,16 @@
     mat-list-item
     (click)="onCloseSideNav()"
     routerLinkActive="list-item-active"
+    [routerLink]="['/statistieken']"
+    *ngIf="isAuth && !isLoading">
+    <mat-icon matListIcon>bar_chart</mat-icon>
+    <span class="nav-caption">Statistieken</span>
+</a>
+
+  <a
+    mat-list-item
+    (click)="onCloseSideNav()"
+    routerLinkActive="list-item-active"
     [routerLink]="['/login']"
     *ngIf="!isAuth && !isLoading">
     <mat-icon matListIcon>fingerprint</mat-icon>

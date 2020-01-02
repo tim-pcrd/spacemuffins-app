@@ -1,0 +1,17 @@
+<section class="main">
+  <div class="spinnerDiv" fxLayout fxLayoutAlign="center" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div class="mainDiv" fxLayout fxLayoutAlign="center" *ngIf="!isLoading">
+    <mat-card>
+      <mat-card-header fxLayout fxLayoutAlign="center">
+        <mat-card-title>Statistieken</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div>
+          Aantal gespeelde quizzen:
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</section>

@@ -8,7 +8,6 @@
   Kies foto
   <mat-icon>photo_camera</mat-icon>
 </button>
-<button (click)="addJson()">add json</button>
 <input hidden type="file" accept="image/*" capture="environment" #fileInput (change)="onFileSelected(fileInput.files)">
 <img class="previewImage" [src]="imgUrl" *ngIf="imgUrl">
 <div class="buttonsDiv" fxLayout fxLayoutAlign="center" fxLayoutGap="10px" *ngIf="imgUrl">

@@ -63,7 +63,6 @@ export class QuizDetailComponent implements OnInit, OnDestroy {
   }
 
   private initForm(quizData) {
-    console.log(quizData.naam);
     this.quizForm = new FormGroup({
       naam: new FormControl(quizData.naam, Validators.required),
       adres: new FormControl(quizData.adres, Validators.required),
