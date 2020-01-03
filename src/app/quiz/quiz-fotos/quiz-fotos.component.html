@@ -5,7 +5,7 @@
 </div>
 
 <button type="button" mat-raised-button color="primary" (click)="fileInput.click()" *ngIf="!imgUrl && urlList.length < 3">
-  Kies foto
+  Neem foto
   <mat-icon>photo_camera</mat-icon>
 </button>
 <input hidden type="file" accept="image/*" capture="environment" #fileInput (change)="onFileSelected(fileInput.files)">

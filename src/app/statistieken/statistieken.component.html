@@ -8,9 +8,111 @@
         <mat-card-title>Statistieken</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <div>
-          Aantal gespeelde quizzen:
-        </div>
+        <mat-list>
+          <mat-list-item >
+            <div fxLayout>
+              <div fxFlex="180px" fxFlexAlign="center"># gespeelde quizzen:</div>
+              <div>
+                <mat-chip-list>
+                  <mat-chip>
+                    {{aantalQuizzen}}
+                  </mat-chip>
+                </mat-chip-list>
+              </div>
+            </div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <div fxLayout>
+              <div fxFlex="180px" fxFlexAlign="center"># Arno:</div>
+              <div>
+                <mat-chip-list>
+                  <mat-chip>
+                    {{aantalArno}}
+                  </mat-chip>
+                </mat-chip-list>
+              </div>
+            </div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <div fxLayout>
+              <div fxFlex="180px" fxFlexAlign="center"># Bart:</div>
+              <div>
+                <mat-chip-list>
+                  <mat-chip>
+                    {{aantalBart}}
+                  </mat-chip>
+                </mat-chip-list>
+              </div>
+            </div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <div fxLayout>
+              <div fxFlex="180px" fxFlexAlign="center"># Tim:</div>
+              <div>
+                <mat-chip-list>
+                  <mat-chip>
+                    {{aantalTim}}
+                  </mat-chip>
+                </mat-chip-list>
+              </div>
+            </div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <div fxLayout>
+              <div fxFlex="180px" fxFlexAlign="center"># Ward:</div>
+              <div>
+                <mat-chip-list>
+                  <mat-chip>
+                    {{aantalWard}}
+                  </mat-chip>
+                </mat-chip-list>
+              </div>
+            </div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <div fxLayout>
+              <div fxFlex="180px" fxFlexAlign="center"># overwinningen:</div>
+              <div>
+                <mat-chip-list>
+                  <mat-chip class="chip-green">
+                    {{aantalOverwinningen}}
+                  </mat-chip>
+                </mat-chip-list>
+              </div>
+            </div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <div fxLayout>
+              <div fxFlex="180px" fxFlexAlign="center"># podiumplaatsen:</div>
+              <div>
+                <mat-chip-list>
+                  <mat-chip class="chip-yellow">
+                    {{aantalPodiumplaatsen}}
+                  </mat-chip>
+                </mat-chip-list>
+              </div>
+            </div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <div fxLayout>
+              <div fxFlex="180px" fxFlexAlign="center"># rode lantaarn:</div>
+              <div>
+                <mat-chip-list>
+                  <mat-chip class="chip-red">
+                    {{aantalLaatstePlaatsen}}
+                  </mat-chip>
+                </mat-chip-list>
+              </div>
+            </div>
+          </mat-list-item>
+        </mat-list>
       </mat-card-content>
     </mat-card>
   </div>
