@@ -14,6 +14,11 @@ mat-card {
 
 }
 
+canvas{
+  height: 400px!important;
+  margin-top: 25px;
+}
+
 @media only screen and (max-width: 959px){
   mat-card {
     width: 75%;
@@ -28,6 +33,10 @@ mat-card {
 
   mat-card {
     width: 80%;
+  }
+
+  canvas{
+    height: 220px!important;
   }
 }
 

@@ -113,6 +113,17 @@
             </div>
           </mat-list-item>
         </mat-list>
+        <div class="chart-wrapper">
+          <canvas baseChart
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [plugins]="barChartPlugins"
+          [legend]="barChartLegend"
+          [chartType]="barChartType"
+          [colors]="chartColors">
+        </canvas>
+      </div>
       </mat-card-content>
     </mat-card>
   </div>

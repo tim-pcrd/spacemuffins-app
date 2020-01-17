@@ -12,7 +12,7 @@ export class StatistiekenService {
 
 
   getQuizzen() {
-    return this.db.collection('quizzen', ref => ref.where('datum', '<=',  this.dateNow))
+    return this.db.collection('quizzen', ref => ref.where('datum', '<',  this.dateNow))
       .valueChanges();
   }
 
