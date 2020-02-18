@@ -9,6 +9,11 @@ section {
   border: 1px solid $primary-color;
   border-radius: 5px;
   padding: 5px;
+  margin-bottom: 0!important;
+}
+
+.refresh {
+  width: 70%;
 }
 
 mat-card {
@@ -38,9 +43,11 @@ mat-card-title {
     width: 100%;
   }
 
-  .checkboxes {
+  .checkboxes, .refresh {
     width: 100%;
   }
+
+
 }
 
 
@@ -57,7 +64,7 @@ mat-card-title {
     width: 100%;
   }
 
-  .checkboxes {
+  .checkboxes, .refresh {
     width: 100%;
   }
 }
@@ -66,6 +73,10 @@ mat-card-title {
   mat-card {
     width: 280px;
   }
+}
+
+#refresh-button {
+  width: 50px;
 }
 
 

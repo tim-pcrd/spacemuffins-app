@@ -31,6 +31,7 @@ import { FotoViewerComponent } from './quiz/quiz-fotos/foto-viewer/foto-viewer.c
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { StatistiekenComponent } from './statistieken/statistieken.component';
+import { InvallersDialogComponent } from './quiz/dialogs/invallers-dialog/invallers-dialog.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { StatistiekenComponent } from './statistieken/statistieken.component';
     PuntenDialogComponent,
     QuizFotosComponent,
     FotoViewerComponent,
-    StatistiekenComponent
+    StatistiekenComponent,
+    InvallersDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +76,8 @@ import { StatistiekenComponent } from './statistieken/statistieken.component';
     ErrorComponent,
     ConfirmationDialogComponent,
     SpelersDialogComponent,
-    PuntenDialogComponent
+    PuntenDialogComponent,
+    InvallersDialogComponent
   ],
   bootstrap: [AppComponent]
 })

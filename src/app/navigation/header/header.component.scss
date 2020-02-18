@@ -66,9 +66,22 @@ mat-toolbar {
 
 }
 
+@media only screen and (max-width: 820px) and (orientation: landscape) {
+  mat-toolbar {
+    height: 50px;
+  }
+
+  .header-img {
+    height: 50px;
+    margin-left: 18px;
+  }
+}
+
 li a{
   font-size: 18px;
 }
+
+
 
 
 

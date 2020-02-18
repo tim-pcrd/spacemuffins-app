@@ -14,6 +14,7 @@ import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { MatSort } from '@angular/material/sort';
+import { InvallersDialogComponent } from '../dialogs/invallers-dialog/invallers-dialog.component';
 
 @Component({
   selector: 'app-quiz-list',
@@ -120,7 +121,7 @@ export class QuizListComponent implements OnInit, AfterViewInit, OnDestroy {
       width: '300px',
       data: {
         quizTitle: selectedQuiz.naam,
-        arno: selectedQuiz.arno,
+        arno: selectedQuiz.arno ,
         bart: selectedQuiz.bart,
         tim: selectedQuiz.tim,
         ward: selectedQuiz.ward,
@@ -132,6 +133,25 @@ export class QuizListComponent implements OnInit, AfterViewInit, OnDestroy {
       if (result) {
         delete result.quizTitle;
         this.quizService.updateQuiz(selectedQuiz.id, result);
+      }
+    });
+  }
+
+  onInvallersEdit(id) {
+    const selectedQuiz = this.quizzen.data.find((quiz: Quiz) => quiz.id === id) as Quiz;
+    const dialogRef = this.dialog.open(InvallersDialogComponent, {
+      width: '300px',
+      data: {
+        quizTitle: selectedQuiz.naam,
+        invaller: ''
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        delete result.quizTitle;
+        selectedQuiz.invallers.push(result.invaller);
+        this.quizService.updateQuiz(selectedQuiz.id, {invallers: selectedQuiz.invallers});
       }
     });
   }

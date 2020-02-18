@@ -83,7 +83,10 @@ export class QuizService {
     this.db.collection('quizzen').doc(id)
       .ref.delete()
       .then(() => this.snackBar.open('Succesvol verwijderd.', null, {duration: 3000}))
-      .catch(() => this.snackBar.openFromComponent(ErrorComponent, {duration: 3000}));
+      .catch((err) => {
+        this.snackBar.openFromComponent(ErrorComponent, {duration: 3000});
+        console.log(err.message);
+      });
   }
 
   updateQuiz(id, data) {

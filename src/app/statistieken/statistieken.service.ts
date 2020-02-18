@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { take } from 'rxjs/operators';
 
 @Injectable()
 export class StatistiekenService {
@@ -13,8 +14,21 @@ export class StatistiekenService {
 
   getQuizzen() {
     return this.db.collection('quizzen', ref => ref.where('datum', '<',  this.dateNow))
-      .valueChanges();
+      .valueChanges()
+      .pipe(
+        take(1)
+      );
   }
+
+  getAllQuizzen() {
+    return this.db.collection('quizzen', ref => ref.orderBy('datum', 'desc'))
+      .valueChanges()
+      .pipe(
+        take(1)
+      );
+  }
+
+
 
 
 }

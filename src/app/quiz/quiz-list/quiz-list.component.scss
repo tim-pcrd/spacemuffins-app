@@ -119,11 +119,17 @@ tr.element-row:not(.expanded-row):active {
   border-radius: 10px;
 }
 
-.quizDetails {
+.quizDetail {
   padding-top: 5px;
 }
 
-.quizButtons, .quizDetails {
+.spelers span {
+  display: inline-block;
+  margin-top: 8px;
+  margin-bottom: 5px;
+}
+
+.quizButtons, .spelers {
   border-top: 2px solid $primary-color;
 
   button {
@@ -175,6 +181,13 @@ tr.element-row:not(.expanded-row):active {
   background-color:rgb(247, 86, 86);
   padding: 2px;
   border: 1px solid rgb(247, 86, 86);
+  border-radius: 8px;
+}
+
+.span-white {
+  background-color: rgb(229, 226, 226);
+  padding: 2px;
+  border: 1px solid rgb(229, 226, 226);
   border-radius: 8px;
 }
 

@@ -1,0 +1,17 @@
+
+<div mat-dialog-content fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="25px">
+  <h2>Ik doe mee</h2>
+  <p style="text-align: center;">({{passedData.quizTitle}})</p>
+  <form #f="ngForm" >
+    <mat-form-field appearance="outline">
+      <mat-label>Naam</mat-label>
+      <input matInput type="text" name="naam" required [(ngModel)]="passedData.invaller" #adres="ngModel"/>
+      <mat-error>Verplicht veld</mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions fxLayout fxLayoutAlign="center">
+  <button mat-raised-button (click)="onAnnuleer()">ANNULEER</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="passedData" [disabled]="!f.valid">OPSLAAN</button>
+</div>
+

@@ -8,6 +8,7 @@
         <mat-card-title>Statistieken</mat-card-title>
       </mat-card-header>
       <mat-card-content>
+
         <mat-list>
           <mat-list-item >
             <div fxLayout>
@@ -112,7 +113,21 @@
               </div>
             </div>
           </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <div fxLayout>
+              <div fxFlex="180px" fxFlexAlign="center">Gemiddeld percentage:</div>
+              <div>
+                <mat-chip-list>
+                  <mat-chip>
+                    {{gemiddeldPercentage | number : '1.2-2'}}
+                  </mat-chip>
+                </mat-chip-list>
+              </div>
+            </div>
+          </mat-list-item>
         </mat-list>
+
         <div class="chart-wrapper">
           <canvas baseChart
           [datasets]="barChartData"
@@ -123,6 +138,11 @@
           [chartType]="barChartType"
           [colors]="chartColors">
         </canvas>
+      </div>
+      <div style="text-align: center;">
+        <button class="downloadBtn" mat-raised-button color="primary" (click)="onDownload()">Genereer downloadlink</button>
+        <hr>
+        <a *ngIf="downloadJsonHref" [href]="downloadJsonHref" download="quizzen.json">Download</a>
       </div>
       </mat-card-content>
     </mat-card>

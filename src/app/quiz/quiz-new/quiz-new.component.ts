@@ -19,10 +19,15 @@ export class QuizNewComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   invallers: string[] = [];
   form: NgForm;
+  arnoChecked;
+  bartChecked;
+  timChecked;
+  wardChecked;
 
   constructor(private quizService: QuizService) { }
 
   ngOnInit() {
+    this.onResetCheckboxes();
   }
 
   addInvaller(event: MatChipInputEvent): void {
@@ -55,23 +60,32 @@ export class QuizNewComponent implements OnInit {
         datum: moment(form.value.datum).toDate(),
         uur: form.value.uur,
         aantalSpelers: form.value.aantalSpelers,
-        arno: form.value.arno ? true : false,
-        bart: form.value.bart ? true : false,
-        tim: form.value.tim ? true : false,
-        ward: form.value.ward ? true : false,
+        arno: form.value.arno === '' ? null : form.value.arno,
+        bart: form.value.bart === '' ? null : form.value.bart,
+        tim: form.value.tim === '' ? null : form.value.tim,
+        ward: form.value.ward === '' ? null : form.value.ward,
         invallers: this.invallers,
         opmerkingen: form.value.opmerkingen
       };
 
       this.quizService.addQuiz(newQuiz);
       this.invallers = [];
+      this.onResetCheckboxes();
       form.resetForm();
     }
+  }
+
+  onResetCheckboxes() {
+    this.arnoChecked = true;
+    this.bartChecked = true;
+    this.timChecked = true;
+    this.wardChecked = true;
   }
 
   onReset(form) {
     this.form = form;
     this.invallers = [];
+    this.onResetCheckboxes();
     this.form.resetForm();
   }
 

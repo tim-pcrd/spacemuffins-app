@@ -58,10 +58,14 @@
       <ng-container  matColumnDef="spelers">
         <th fxHide.lt-md mat-header-cell *matHeaderCellDef>Spelers </th>
         <td fxHide.lt-md mat-cell *matCellDef="let element">
-          {{element.arno === true ? ' Arno,' : ''}}
+          <!-- {{element.arno === true ? ' Arno,' : ''}}
           {{element.bart === true ? ' Bart,' : ''}}
           {{element.tim === true ? ' Tim,' : ''}}
-          {{element.ward === true ? ' Ward' : ''}}
+          {{element.ward === true ? ' Ward' : ''}} -->
+          <span [ngClass]="{'span-green': element.arno === true, 'span-red': element.arno === false, 'span-white': element.arno === null}">Arno</span>&nbsp;
+          <span [ngClass]="{'span-green': element.bart === true, 'span-red': element.bart === false, 'span-white': element.bart === null}">Bart</span>&nbsp;
+          <span [ngClass]="{'span-green': element.tim === true, 'span-red': element.tim === false, 'span-white': element.tim === null}">Tim</span>&nbsp;
+          <span [ngClass]="{'span-green': element.ward === true, 'span-red': element.ward === false, 'span-white': element.ward === null}">Ward</span>
         </td>
       </ng-container>
 
@@ -70,6 +74,12 @@
         <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
           <div class="element-detail" fxLayout="column"
                 [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                <div class="spelers">
+                  <span fxHide.gt-sm [ngClass]="{'span-green': element.arno === true, 'span-red': element.arno === false, 'span-white': element.arno === null}">Arno</span>&nbsp;
+                  <span fxHide.gt-sm [ngClass]="{'span-green': element.bart === true, 'span-red': element.bart === false, 'span-white': element.bart === null}">Bart</span>&nbsp;
+                  <span fxHide.gt-sm [ngClass]="{'span-green': element.tim === true, 'span-red': element.tim === false, 'span-white': element.tim === null}">Tim</span>&nbsp;
+                  <span fxHide.gt-sm [ngClass]="{'span-green': element.ward === true, 'span-red': element.ward === false, 'span-white': element.ward === null}">Ward</span>
+                </div>
                 <div class="quizDetails" fxLayout fxLayoutGap.xs="15px" fxLayoutGap.gt-xs="40px">
                     <div fxFlex.lt-md="200px" fxFlex.xs="100px" fxFlex.gt-sm="350px">
                       <div class="quiz-detail" style="word-wrap: break-word;">
@@ -91,13 +101,13 @@
                           {{element.aantalSpelersAanwezig}}/{{element.aantalSpelers}}
                         </span>
                       </div>
-                      <div fxHide.gt-sm class="quiz-detail" *ngIf="element.arno || element.bart || element.tim || element.ward">
+                      <!-- <div fxHide.gt-sm class="quiz-detail" *ngIf="element.arno || element.bart || element.tim || element.ward">
                           <span class="span-title">Spelers: </span><br>
                           {{element.arno === true ? ' Arno,' : ''}}
                           {{element.bart === true ? ' Bart,' : ''}}
                           {{element.tim === true ? ' Tim,' : ''}}
                           {{element.ward === true ? ' Ward' : ''}}<br>
-                      </div>
+                      </div> -->
                       <div class="quiz-detail" *ngIf="element.invallers.length > 0">
                           <span class="span-title">Invallers: </span><br>
                           <span *ngFor="let speler of element.invallers">{{speler + ', '}}</span>
@@ -122,20 +132,29 @@
                     </div>
                 </div>
                 <div *ngIf="!isAuth" style="height:10px"></div>
-                <div class="quizButtons" fxLayout fxLayoutAlign="space-between" *ngIf="isAuth">
+                <div class="quizButtons" fxLayout fxLayoutAlign="space-between" *ngIf="isAuth
+                  || (!isAuth && element.datum.toDate() >= dateNow)">
                   <div fxLayout fxLayoutAlign="start" >
-                      <button mat-icon-button color="primary" title="Bewerk" (click)="onQuizEdit(element.id)"><mat-icon>edit</mat-icon></button>
-                      <button mat-icon-button color="primary" title="Spelers" (click)="onSpelersEdit(element.id)"><mat-icon>person_add</mat-icon></button>
+                      <button mat-icon-button color="primary" title="Bewerk" (click)="onQuizEdit(element.id)" *ngIf="isAuth">
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                      <button mat-icon-button color="primary" title="Spelers" (click)="onSpelersEdit(element.id)" *ngIf="isAuth">
+                        <mat-icon>person_add</mat-icon>
+                      </button>
+                      <button mat-icon-button color="primary" title="Ik doe mee" (click)="onInvallersEdit(element.id)"
+                        *ngIf="!isAuth && element.aantalSpelers > element.aantalSpelersAanwezig && element.datum.toDate() >= dateNow">
+                        <mat-icon>person_add</mat-icon>
+                      </button>
                       <button mat-icon-button color="primary" title="Kalender"
                         (click)="addToCalendar(element.datum.toDate(), element.naam, element.adres, element.uur)"
                         *ngIf="element.datum.toDate() >= dateNow">
                         <mat-icon>calendar_today</mat-icon>
                       </button>
-                      <button mat-icon-button color="primary" title="Foto's" (click)="onFotoEdit(element.id)"><mat-icon>photo_camera</mat-icon></button>
+                      <button mat-icon-button color="primary" title="Foto's" (click)="onFotoEdit(element.id)" *ngIf="isAuth"><mat-icon>photo_camera</mat-icon></button>
 
                   </div>
                   <div fxLayout fxLayoutAlign="end">
-                      <div fxLayout fxLayoutAlign="center center" *ngIf="element.score">
+                      <div fxLayout fxLayoutAlign="center center" *ngIf="element.score && isAuth">
                         <span class="scoreSpan">Score: &nbsp;</span>
                         <mat-chip-list>
                           <mat-chip
@@ -144,7 +163,7 @@
                           </mat-chip>
                         </mat-chip-list>
                       </div>
-                      <button mat-icon-button color="warn" title="Verwijder" (click)="onDeleteQuiz(element.id)"><mat-icon>clear</mat-icon></button>
+                      <button mat-icon-button color="warn" title="Verwijder" (click)="onDeleteQuiz(element.id)" *ngIf="isAuth"><mat-icon>clear</mat-icon></button>
                   </div>
                 </div>
 

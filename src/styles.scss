@@ -23,3 +23,7 @@ simple-snack-bar span {
   margin:auto;
   text-align: center;
 }
+
+.mat-checkbox-indeterminate .mat-checkbox-background{
+   background-color: grey!important;
+}

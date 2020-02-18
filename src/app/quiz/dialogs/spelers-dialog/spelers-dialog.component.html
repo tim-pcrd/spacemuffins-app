@@ -4,18 +4,18 @@
   <p style="text-align: center;">({{passedData.quizTitle}})</p>
   <div class="checkboxes" fxLayout="row" fxLayoutGap="50px">
     <div fxLayout="column" fxLayoutGap="25px">
-      <mat-checkbox color="primary" name="arno" [(ngModel)]="passedData.arno">
+      <mat-checkbox color="primary" name="arno" [(ngModel)]="passedData.arno" [indeterminate]="passedData.arno === null">
           Arno
         </mat-checkbox>
-        <mat-checkbox color="primary" name="tim" [(ngModel)]="passedData.tim">
+        <mat-checkbox color="primary" name="tim" [(ngModel)]="passedData.tim" [indeterminate]="passedData.tim === null">
           Tim
         </mat-checkbox>
     </div>
     <div fxLayout="column" fxLayoutGap="25px">
-        <mat-checkbox color="primary" name="bart" [(ngModel)]="passedData.bart">
+        <mat-checkbox color="primary" name="bart" [(ngModel)]="passedData.bart" [indeterminate]="passedData.bart === null">
           Bart
         </mat-checkbox>
-        <mat-checkbox color="primary" name="ward" [(ngModel)]="passedData.ward">
+        <mat-checkbox color="primary" name="ward" [(ngModel)]="passedData.ward" [indeterminate]="passedData.ward === null">
           Ward
         </mat-checkbox>
     </div>

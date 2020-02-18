@@ -76,18 +76,24 @@
         </mat-form-field>
 
         <div class="checkboxes" fxLayout="row" fxLayoutAlign="space-between">
-          <mat-checkbox color="primary" name="arno" ngModel>
+          <mat-checkbox color="primary" name="arno" ngModel [(indeterminate)]="arnoChecked">
             Arno
           </mat-checkbox>
-          <mat-checkbox color="primary" name="bart" ngModel>
+          <mat-checkbox color="primary" name="bart" ngModel [(indeterminate)]="bartChecked">
             Bart
           </mat-checkbox>
-          <mat-checkbox color="primary" name="tim" ngModel >
+          <mat-checkbox color="primary" name="tim" ngModel [(indeterminate)]="timChecked">
             Tim
           </mat-checkbox>
-          <mat-checkbox color="primary" name="ward" ngModel>
+          <mat-checkbox color="primary" name="ward" ngModel [(indeterminate)]="wardChecked">
             Ward
           </mat-checkbox>
+        </div>
+
+        <div class="refresh" fxLayout="row" fxLayoutAlign="end">
+          <button mat-icon-button color="primary" id="refresh-button" type="button" (click)="onResetCheckboxes()">
+            <mat-icon>undo</mat-icon>
+          </button>
         </div>
 
         <mat-form-field appearance="outline">

@@ -81,16 +81,16 @@
 
 
         <div class="checkboxes" fxLayout="row" fxLayoutAlign="space-between">
-          <mat-checkbox color="primary" formControlName="arno">
+          <mat-checkbox color="primary" formControlName="arno" [indeterminate]="quizForm.value.arno === null">
             Arno
           </mat-checkbox>
-          <mat-checkbox color="primary" formControlName="bart">
+          <mat-checkbox color="primary" formControlName="bart" [indeterminate]="quizForm.value.bart === null">
             Bart
           </mat-checkbox>
-          <mat-checkbox color="primary" formControlName="tim">
+          <mat-checkbox color="primary" formControlName="tim" [indeterminate]="quizForm.value.tim === null">
             Tim
           </mat-checkbox>
-          <mat-checkbox color="primary" formControlName="ward">
+          <mat-checkbox color="primary" formControlName="ward" [indeterminate]="quizForm.value.ward === null">
             Ward
           </mat-checkbox>
         </div>

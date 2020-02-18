@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { Quiz } from '../quiz/quiz.model';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-statistieken',
@@ -22,6 +23,8 @@ export class StatistiekenComponent implements OnInit, OnDestroy {
   aantalOverwinningen;
   aantalPodiumplaatsen;
   aantalLaatstePlaatsen;
+  gemiddeldPercentage;
+  downloadJsonHref: any;
   private sub: Subscription;
 
   barChartOptions: ChartOptions = {
@@ -36,17 +39,19 @@ export class StatistiekenComponent implements OnInit, OnDestroy {
       }],
     }
   };
-  barChartLabels: Label[] = ['<50%', '50% - 60%', '60% - 70%', '70% - 80%', '80% - 90%', '>90%'];
+  barChartLabels: Label[] = ['<50%', '50% - 55%', '55% - 60%', '60% - 65%', '65% - 70%',
+    '70% - 75%', '75% - 80%', '80% - 85%', '85% - 90%', '90% - 95%', '>95%'];
   barChartType: ChartType = 'bar';
   barChartLegend = true;
   barChartPlugins = [];
-  chartColors = [{backgroundColor: ['#2a4b47', '#2a4b47', '#2a4b47', '#2a4b47', '#2a4b47', '#2a4b47']}];
+  chartColors = [{backgroundColor: ['#2a4b47', '#2a4b47', '#2a4b47', '#2a4b47', '#2a4b47', '#2a4b47',
+    '#2a4b47', '#2a4b47', '#2a4b47', '#2a4b47', '#2a4b47']}];
 
   barChartData: ChartDataSets[];
 
 
 
-  constructor(private statistiekenService: StatistiekenService) { }
+  constructor(private statistiekenService: StatistiekenService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     this.isLoading = true;
@@ -64,6 +69,7 @@ export class StatistiekenComponent implements OnInit, OnDestroy {
           quiz => quiz.positie === quiz.aantalPloegen && quiz.positie && quiz.aantalPloegen
         ).length;
 
+        this.gemiddeldPercentage = this.calculateGemiddelde(this.quizzen);
         this.calculateChart(this.quizzen);
 
         this.isLoading = false;
@@ -74,24 +80,44 @@ export class StatistiekenComponent implements OnInit, OnDestroy {
     const under50 = this.quizzen.filter(
       quiz => quiz.behaaldePunten / quiz.maxPunten < 0.5 && quiz.behaaldePunten && quiz.maxPunten
     ).length;
-    const between50and60 = this.quizzen.filter(
-      quiz => quiz.behaaldePunten / quiz.maxPunten >= 0.5 && quiz.behaaldePunten / quiz.maxPunten < 0.6
+    const between50and55 = this.quizzen.filter(
+      quiz => quiz.behaaldePunten / quiz.maxPunten >= 0.5 && quiz.behaaldePunten / quiz.maxPunten < 0.55
       && quiz.behaaldePunten && quiz.maxPunten
     ).length;
-    const between60and70 = this.quizzen.filter(
-      quiz => quiz.behaaldePunten / quiz.maxPunten >= 0.6 && quiz.behaaldePunten / quiz.maxPunten < 0.7
+    const between55and60 = this.quizzen.filter(
+      quiz => quiz.behaaldePunten / quiz.maxPunten >= 0.55 && quiz.behaaldePunten / quiz.maxPunten < 0.6
       && quiz.behaaldePunten && quiz.maxPunten
     ).length;
-    const between70and80 = this.quizzen.filter(
-      quiz => quiz.behaaldePunten / quiz.maxPunten >= 0.7 && quiz.behaaldePunten / quiz.maxPunten < 0.8
+    const between60and65 = this.quizzen.filter(
+      quiz => quiz.behaaldePunten / quiz.maxPunten >= 0.6 && quiz.behaaldePunten / quiz.maxPunten < 0.65
       && quiz.behaaldePunten && quiz.maxPunten
     ).length;
-    const between80and90 = this.quizzen.filter(
-      quiz => quiz.behaaldePunten / quiz.maxPunten >= 0.8 && quiz.behaaldePunten / quiz.maxPunten < 0.9
+    const between65and70 = this.quizzen.filter(
+      quiz => quiz.behaaldePunten / quiz.maxPunten >= 0.65 && quiz.behaaldePunten / quiz.maxPunten < 0.7
       && quiz.behaaldePunten && quiz.maxPunten
     ).length;
-    const over90 = this.quizzen.filter(
-      quiz => quiz.behaaldePunten / quiz.maxPunten >= 0.9
+    const between70and75 = this.quizzen.filter(
+      quiz => quiz.behaaldePunten / quiz.maxPunten >= 0.7 && quiz.behaaldePunten / quiz.maxPunten < 0.75
+      && quiz.behaaldePunten && quiz.maxPunten
+    ).length;
+    const between75and80 = this.quizzen.filter(
+      quiz => quiz.behaaldePunten / quiz.maxPunten >= 0.75 && quiz.behaaldePunten / quiz.maxPunten < 0.8
+      && quiz.behaaldePunten && quiz.maxPunten
+    ).length;
+    const between80and85 = this.quizzen.filter(
+      quiz => quiz.behaaldePunten / quiz.maxPunten >= 0.8 && quiz.behaaldePunten / quiz.maxPunten < 0.85
+      && quiz.behaaldePunten && quiz.maxPunten
+    ).length;
+    const between85and90 = this.quizzen.filter(
+      quiz => quiz.behaaldePunten / quiz.maxPunten >= 0.85 && quiz.behaaldePunten / quiz.maxPunten < 0.9
+      && quiz.behaaldePunten && quiz.maxPunten
+    ).length;
+    const between90and95 = this.quizzen.filter(
+      quiz => quiz.behaaldePunten / quiz.maxPunten >= 0.9 && quiz.behaaldePunten / quiz.maxPunten < 0.95
+      && quiz.behaaldePunten && quiz.maxPunten
+    ).length;
+    const over95 = this.quizzen.filter(
+      quiz => quiz.behaaldePunten / quiz.maxPunten >= 0.95
       && quiz.behaaldePunten && quiz.maxPunten
     ).length;
 
@@ -99,15 +125,41 @@ export class StatistiekenComponent implements OnInit, OnDestroy {
       {
         data: [
           under50,
-          between50and60,
-          between60and70,
-          between70and80,
-          between80and90,
-          over90
+          between50and55,
+          between55and60,
+          between60and65,
+          between65and70,
+          between70and75,
+          between75and80,
+          between80and85,
+          between85and90,
+          between90and95,
+          over95
         ],
         label: 'Aantal quizzen'
       }
     ];
+  }
+
+  calculateGemiddelde(quizzen: Quiz[]) {
+    const percentages = this.quizzen
+      .filter(quiz => quiz.behaaldePunten && quiz.maxPunten)
+      .map(quiz => {
+        return (quiz.behaaldePunten / quiz.maxPunten) * 100;
+      });
+    let totaal = 0;
+    for (const percentage of percentages) {
+      totaal += percentage;
+    }
+    return totaal / percentages.length;
+  }
+
+  onDownload() {
+    this.statistiekenService.getAllQuizzen().subscribe(data => {
+      const json = JSON.stringify(data);
+      const uri = this.sanitizer.bypassSecurityTrustUrl('data:text/json;charset=UTF-8,' + encodeURIComponent(json));
+      this.downloadJsonHref = uri;
+    });
   }
 
 

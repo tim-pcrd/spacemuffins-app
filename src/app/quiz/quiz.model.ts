@@ -5,10 +5,10 @@ export interface Quiz {
   datum: Date;
   uur: string;
   aantalSpelers: number;
-  arno: boolean;
-  bart: boolean;
-  tim: boolean;
-  ward: boolean;
+  arno: any;
+  bart: any;
+  tim: any;
+  ward: any;
   invallers?: string[];
   aantalSpelersAanwezig?: number;
   opmerkingen?: string;
