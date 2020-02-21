@@ -25,7 +25,8 @@ export class StatistiekenComponent implements OnInit, OnDestroy {
   aantalLaatstePlaatsen;
   gemiddeldPercentage;
   downloadJsonHref: any;
-  private sub: Subscription;
+  private sub1: Subscription;
+  private sub2: Subscription;
 
   barChartOptions: ChartOptions = {
     responsive: true,
@@ -55,7 +56,7 @@ export class StatistiekenComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isLoading = true;
-    this.sub = this.statistiekenService.getQuizzen()
+    this.sub1 = this.statistiekenService.getQuizzen()
       .subscribe((data: Quiz[]) => {
         this.quizzen = data;
         this.aantalQuizzen = this.quizzen.length;
@@ -155,7 +156,7 @@ export class StatistiekenComponent implements OnInit, OnDestroy {
   }
 
   onDownload() {
-    this.statistiekenService.getAllQuizzen().subscribe(data => {
+    this.sub2 = this.statistiekenService.getAllQuizzen().subscribe(data => {
       const json = JSON.stringify(data);
       const uri = this.sanitizer.bypassSecurityTrustUrl('data:text/json;charset=UTF-8,' + encodeURIComponent(json));
       this.downloadJsonHref = uri;
@@ -164,8 +165,11 @@ export class StatistiekenComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy() {
-    if (this.sub) {
-      this.sub.unsubscribe();
+    if (this.sub1) {
+      this.sub1.unsubscribe();
+    }
+    if (this.sub2) {
+      this.sub2.unsubscribe();
     }
   }
 

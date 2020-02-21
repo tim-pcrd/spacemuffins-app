@@ -31,7 +31,17 @@
       class="mat-elevation-z8">
       <ng-container matColumnDef="datum">
         <th mat-header-cell *matHeaderCellDef>Datum </th>
-        <td mat-cell *matCellDef="let element"> {{element.datum.toDate() | date:'dd/MM/yyyy  E'}} </td>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="element.datum.toDate().getFullYear() === dateNow.getFullYear() &&
+            element.datum.toDate().getMonth() === dateNow.getMonth() &&
+            element.datum.toDate().getDate() === dateNow.getDate(); else date"
+            style="color:rgb(17, 150, 17); font-weight: bold;font-size: 14px!important;border:2px solid rgb(17, 150, 17);border-radius: 6px;padding: 2px;">
+            Vandaag
+          </span>
+          <ng-template #date>
+            {{element.datum.toDate() | date:'dd/MM/yyyy  E'}}
+          </ng-template>
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="naam">
