@@ -1,5 +1,5 @@
 <mat-toolbar>
-  <div fxHide.gt-xs>
+  <div fxHide.gt-sm>
     <button color="primary" mat-icon-button (click)="onToggleSideNav()">
       <mat-icon>menu</mat-icon>
     </button>
@@ -9,7 +9,7 @@
   </a>
   <span class="title">Space<span class="second-title">muffins</span></span>
 
-  <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
+  <div fxFlex fxLayout fxLayoutAlign="end" fxHide.lt-md>
     <ul fxLayout fxLayoutGap="15px" class="menu-items">
       <li>
           <a [routerLink]="['quizzen']" routerLinkActive="active">Quizoverzicht</a>

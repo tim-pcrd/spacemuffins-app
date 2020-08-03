@@ -32,6 +32,11 @@ export class QuizService {
       });
   }
 
+  getFirstQuizToCome() {
+    return this.db.collection('quizzen', ref =>
+      ref.where('datum', '>=', new Date()).orderBy('datum', 'asc').limit(1)).valueChanges() as Observable<Quiz[]>;
+  }
+
   getQuizzenBySeizoenFromDb(beginDatum: Date, eindDatum: Date) {
     return this.db.collection('quizzen', ref =>
       ref.where('datum', '>=', beginDatum).where('datum', '<=', eindDatum).orderBy('datum', 'desc'))

@@ -5,8 +5,19 @@
       <span class="titleOne">Space</span><span class="titleTwo">muffins</span>
     </p>
   </div>
+
   <div class="buttonsDiv" fxLayout fxLayoutAlign="center" fxLayoutGap="15px">
     <a mat-raised-button color="primary" [routerLink]="['/quizzen']">Quizoverzicht</a>
     <a mat-raised-button color="primary" href="http://www.bqb.be/ploeg?Pl_ID=11973" target="_blank">VQR</a>
   </div>
+  <div fxLayout fxLayoutAlign="center">
+    <mat-card fxFlex.lt-sm="290px" fxFlex="450px" *ngIf="quiz">
+      <mat-icon class="info">info</mat-icon>
+      <span class="card-title">Eerstvolgende quiz:</span>
+      <span class="card-item">{{quiz.datum.toDate() | date:'EEEE dd/MM/yyyy'}}</span>
+      <span class="card-item">{{quiz.naam}}</span>
+      <span class="card-item"><mat-icon>place</mat-icon>{{quiz.adres}}</span>
+    </mat-card>
+  </div>
+
 </section>

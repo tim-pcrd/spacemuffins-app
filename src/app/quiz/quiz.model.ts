@@ -2,7 +2,7 @@ export interface Quiz {
   id?: string;
   naam: string;
   adres: string;
-  datum: Date;
+  datum: any;
   uur: string;
   aantalSpelers: number;
   arno: any;

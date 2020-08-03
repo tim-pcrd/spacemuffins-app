@@ -221,7 +221,7 @@ export class QuizListComponent implements OnInit, AfterViewInit, OnDestroy {
     const beginDatum = yyyy.toString() + mm.toString() + dd.toString() + 'T' + uur + '00';
     const eindDatum = yyyy.toString() + mm.toString() + dd.toString() + 'T235900';
     window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${naam}&dates=${beginDatum}%2F${eindDatum}` +
-                `&location=${adres}`, '_blank');
+                `&location=${adres}`);
   }
 
 
